@@ -25,7 +25,7 @@ class Votes extends REST_Controller {
 			// $this->output->cache(10080);//7天
 			// if ($this->cache->is_supported ( 'memcached' )) {
 			$cache_name = sprintf ( '%s_%s_mrplay_result', ENVIRONMENT, 'vote' );
-			//$this->cache->memcached->delete ( $cache_name );
+			$this->cache->memcached->delete ( $cache_name );
 			$this->data_result = $this->cache->memcached->get ( $cache_name );
 			if (empty ( $this->data_result )) {
 				$this->load->model ( 'vidol_old/vote_model' );
