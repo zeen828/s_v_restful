@@ -39,4 +39,28 @@ class Vote_model extends CI_Model
         //echo $this->r_db->last_query();
         return $query;
     }
+    
+    /**
+     * 玩很大校園票選總投票數
+     * @return unknown
+     */
+    public function get_vote_mrplay_sum ()
+    {
+    	$this->r_db->select('v_pk as no,title,SUM(ticket_add) as ticket_sum');
+    	$query = $this->r_db->get('vote_mrplay_tbl');
+    	//echo $this->r_db->last_query();
+    	return $query;
+    }
+    
+    /**
+     * 玩很大校園票選投票資料
+     * @return unknown
+     */
+    public function get_vote_mrplay ()
+    {
+    	$this->r_db->select('v_pk as no,title,ticket,ticket_add');
+    	$query = $this->r_db->get('vote_mrplay_tbl');
+    	//echo $this->r_db->last_query();
+    	return $query;
+    }
 }
