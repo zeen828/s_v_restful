@@ -41,7 +41,7 @@ class Votes extends REST_Controller {
 					}
 				}
 				// 投票資料
-				$query = $this->vote_model->get_vote ();
+				$query = $this->vote_model->get_vote_mrplay ();
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
