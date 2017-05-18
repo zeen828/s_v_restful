@@ -37,7 +37,7 @@ class Votes extends REST_Controller {
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
-						$sum [$row->no] = $row->ticket_sum;
+						$sum [$row->category_no] = $row->ticket_sum;
 					}
 				}
 				// 投票資料
@@ -45,7 +45,7 @@ class Votes extends REST_Controller {
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
-						$this->data_result [$row->no] = ($row->ticket_add <= 0 || $sum [$row->no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->no] * 100) );
+						$this->data_result [$row->no] = ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) );
 					}
 				}
 				$this->data_result ['cache_name'] = $cache_name;

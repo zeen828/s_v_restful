@@ -46,7 +46,8 @@ class Vote_model extends CI_Model
      */
     public function get_vote_mrplay_sum ()
     {
-    	$this->r_db->select('v_pk as no,title,SUM(ticket_add) as ticket_sum');
+    	$this->r_db->select('category_no,title,SUM(ticket_add) as ticket_sum');
+    	$this->r_db->group_by('category_no');
     	$query = $this->r_db->get('vote_mrplay_tbl');
     	//echo $this->r_db->last_query();
     	return $query;
@@ -58,7 +59,7 @@ class Vote_model extends CI_Model
      */
     public function get_vote_mrplay ()
     {
-    	$this->r_db->select('v_pk as no,title,ticket,ticket_add');
+    	$this->r_db->select('v_pk as no,category_no,title,ticket,ticket_add');
     	$query = $this->r_db->get('vote_mrplay_tbl');
     	//echo $this->r_db->last_query();
     	return $query;
