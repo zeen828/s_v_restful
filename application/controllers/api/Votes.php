@@ -10,10 +10,14 @@ class Votes extends REST_Controller {
 		header ( 'Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS' );
 		parent::__construct ();
 	}
+
 	public function vote_404_get() {
 		$this->response ( NULL, 404 );
 	}
-	//玩很大進校園投票
+
+	/**
+	 * 玩很大進校園投票
+	 */
 	public function mrplay_get() {
 		// mysql
 		try {
@@ -45,7 +49,10 @@ class Votes extends REST_Controller {
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
-						$this->data_result [$row->no] = ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) );
+						$this->data_result [$row->no] = array(
+								'title' => $row->title,
+								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) )
+						);
 					}
 				}
 				$this->data_result ['cache_name'] = $cache_name;
