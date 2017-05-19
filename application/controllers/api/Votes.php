@@ -27,7 +27,6 @@ class Votes extends REST_Controller {
 	 * 玩很大進校園投票
 	 */
 	public function mrplay_get() {
-		// mysql
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
@@ -54,7 +53,7 @@ class Votes extends REST_Controller {
 				// 防止array組合型態錯誤警告
 				$data_cache [$cache_name] = array ();
 				$this->load->model ( 'vidol_old/vote_model' );
-				// 統計投票總數
+				// 1.統計投票總數(一個投票項目建一個數字)
 				$sum = array (
 						'1' => 0.00,
 				);
@@ -67,12 +66,12 @@ class Votes extends REST_Controller {
 					}
 				}
 				unset($query);
-				// 投票資料
+				// 2.投票資料
 				$query = $this->vote_model->get_vote_mrplay ('v_pk as no,category_no,title,ticket,ticket_add');
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
-						$data_cache [$cache_name] [$row->no] = array(
+						$data_cache [$cache_name] [] = array(
 								'title' => $row->title,
 								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) )
 						);
@@ -80,6 +79,7 @@ class Votes extends REST_Controller {
 					}
 				}
 				unset($query);
+				unset($sum);
 				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
 			}
 			$this->data_result ['result'] = $data_cache [$cache_name];
