@@ -1,14 +1,22 @@
 <?php
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
-
+ini_set ( "display_errors", "On" ); // On, Off
 require APPPATH . '/libraries/REST_Controller.php';
 class Votes extends REST_Controller {
+	private $data_debug;
 	private $data_result;
 	public function __construct() {
+		$this->data_debug = true;
 		header ( 'Access-Control-Allow-Origin: *' );
 		header ( 'Access-Control-Allow-Headers: X-Requested-With' );
 		header ( 'Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS' );
 		parent::__construct ();
+	}
+
+	public function __destruct() {
+		parent::__destruct ();
+		unset ( $this->data_debug );
+		unset ( $this->data_result );
 	}
 
 	public function vote_404_get() {
@@ -21,6 +29,14 @@ class Votes extends REST_Controller {
 	public function mrplay_get() {
 		// mysql
 		try {
+			// 開始時間標記
+			$this->benchmark->mark ( 'code_start' );
+			// 變數
+			$data_input = array ();
+			$data_cache = array ();
+			// 接收變數
+			$data_input ['debug'] = $this->get ( 'debug' );
+			//
 			$this->load->driver ( 'cache', array (
 					'adapter' => 'memcached',
 					'backup' => 'dummy'
@@ -30,36 +46,56 @@ class Votes extends REST_Controller {
 			// if ($this->cache->is_supported ( 'memcached' )) {
 			$cache_name = sprintf ( '%s_%s_mrplay_result', ENVIRONMENT, 'vote' );
 			//$this->cache->memcached->delete ( $cache_name );
-			$this->data_result = $this->cache->memcached->get ( $cache_name );
-			if (empty ( $this->data_result )) {
+			$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
+			if ($data_cache [$cache_name] == false) {
+				// 防止array組合型態錯誤警告
+				$data_cache [$cache_name] = array ();
 				$this->load->model ( 'vidol_old/vote_model' );
 				// 統計投票總數
 				$sum = array (
 						'1' => 0.00,
 				);
-				$query = $this->vote_model->get_vote_mrplay_sum ();
+				$query = $this->vote_model->get_vote_mrplay_sum ('category_no,title,SUM(ticket_add) as ticket_sum');
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
 						$sum [$row->category_no] = $row->ticket_sum;
+						unset($row);
 					}
 				}
+				unset($query);
 				// 投票資料
-				$query = $this->vote_model->get_vote_mrplay ();
+				$query = $this->vote_model->get_vote_mrplay ('v_pk as no,category_no,title,ticket,ticket_add');
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
-						$this->data_result [$row->no] = array(
+						$data_cache [$cache_name] [$row->no] = array(
 								'title' => $row->title,
 								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) )
 						);
+						unset($row);
 					}
 				}
-				$this->data_result ['cache_name'] = $cache_name;
-				$this->data_result ['cache_time'] = date ( 'Y-m-d h:i:s' );
-				$this->cache->memcached->save ( $cache_name, $this->data_result, 86400 ); // 24H
+				unset($query);
+				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
 			}
+			unset ( $data_cache [$cache_name] );
+			unset ( $cache_name );
+			unset ( $data_cache );
+			unset ( $data_input );
+			//
+			$this->data_result ['result'] = $data_cache [$cache_name];
+			// DEBUG印出
+			if ($data_input ['debug'] == 'debug') {
+				$this->data_result ['debug'] ['data_input'] = $data_input;
+				$this->data_result ['debug'] ['data_cache'] = $data_cache;
+				$this->data_result ['debug'] ['cache_name'] = $cache_name;
+				$this->data_result ['debug'] ['cache_time'] = date ( 'Y-m-d h:i:s' );
+			}
+			// 結束時間標記
+			$this->benchmark->mark ( 'code_end' );
 			// }
+			$this->data_result ['time'] = $this->benchmark->elapsed_time ( 'code_start', 'code_end' );
 			$this->response ( $this->data_result, 200 );
 		} catch ( Exception $e ) {
 			show_error ( $e->getMessage () . ' --- ' . $e->getTraceAsString () );
