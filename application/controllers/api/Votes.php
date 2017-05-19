@@ -35,6 +35,7 @@ class Votes extends REST_Controller {
 			$data_input = array ();
 			$data_cache = array ();
 			// 接收變數
+			$data_input ['cache'] = $this->get ( 'cache' );
 			$data_input ['debug'] = $this->get ( 'debug' );
 			//
 			$this->load->driver ( 'cache', array (
@@ -45,7 +46,9 @@ class Votes extends REST_Controller {
 			// $this->output->cache(10080);//7天
 			// if ($this->cache->is_supported ( 'memcached' )) {
 			$cache_name = sprintf ( '%s_%s_mrplay_result', ENVIRONMENT, 'vote' );
-			//$this->cache->memcached->delete ( $cache_name );
+			if ($data_input ['cache'] == 'delete') {
+				$this->cache->memcached->delete ( $cache_name );
+			}
 			$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
 			if ($data_cache [$cache_name] == false) {
 				// 防止array組合型態錯誤警告
