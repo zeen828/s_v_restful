@@ -79,11 +79,6 @@ class Votes extends REST_Controller {
 				unset($query);
 				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
 			}
-			unset ( $data_cache [$cache_name] );
-			unset ( $cache_name );
-			unset ( $data_cache );
-			unset ( $data_input );
-			//
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
@@ -92,6 +87,10 @@ class Votes extends REST_Controller {
 				$this->data_result ['debug'] ['cache_name'] = $cache_name;
 				$this->data_result ['debug'] ['cache_time'] = date ( 'Y-m-d h:i:s' );
 			}
+			unset ( $data_cache [$cache_name] );
+			unset ( $cache_name );
+			unset ( $data_cache );
+			unset ( $data_input );
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// }
