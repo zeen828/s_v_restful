@@ -67,11 +67,12 @@ class Votes extends REST_Controller {
 				}
 				unset($query);
 				// 2.投票資料
-				$query = $this->vote_model->get_vote_mrplay ('v_pk as no,category_no,title,ticket,ticket_add');
+				$query = $this->vote_model->get_vote_mrplay ('v_pk as no,category_no,code,title,ticket,ticket_add');
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
 						$data_cache [$cache_name] [] = array(
+								'code' => $row->code,
 								'title' => $row->title,
 								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) )
 						);
