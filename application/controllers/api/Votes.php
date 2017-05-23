@@ -86,6 +86,7 @@ class Votes extends REST_Controller {
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
+				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
 				$this->data_result ['debug'] ['data_input'] = $data_input;
 				$this->data_result ['debug'] ['data_cache'] = $data_cache;
 				$this->data_result ['debug'] ['cache_name'] = $cache_name;
