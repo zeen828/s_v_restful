@@ -12,17 +12,15 @@ class Votes extends REST_Controller {
 		header ( 'Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS' );
 		parent::__construct ();
 	}
-
 	public function __destruct() {
 		parent::__destruct ();
 		unset ( $this->data_debug );
 		unset ( $this->data_result );
 	}
-
 	public function vote_404_get() {
 		$this->response ( NULL, 404 );
 	}
-
+	
 	/**
 	 * 玩很大進校園投票
 	 */
@@ -39,7 +37,7 @@ class Votes extends REST_Controller {
 			//
 			$this->load->driver ( 'cache', array (
 					'adapter' => 'memcached',
-					'backup' => 'dummy'
+					'backup' => 'dummy' 
 			) );
 			// 實體cache#jsonp會死掉
 			// $this->output->cache(10080);//7天
@@ -55,32 +53,32 @@ class Votes extends REST_Controller {
 				$this->load->model ( 'vidol_old/vote_model' );
 				// 1.統計投票總數(一個投票項目建一個數字)
 				$sum = array (
-						'1' => 0.00,
+						'1' => 0.00 
 				);
-				$query = $this->vote_model->get_vote_mrplay_sum ('category_no,title,SUM(ticket_add) as ticket_sum');
+				$query = $this->vote_model->get_vote_mrplay_sum ( 'category_no,title,SUM(ticket_add) as ticket_sum' );
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
 						$sum [$row->category_no] = $row->ticket_sum;
-						unset($row);
+						unset ( $row );
 					}
 				}
-				unset($query);
+				unset ( $query );
 				// 2.投票資料
-				$query = $this->vote_model->get_vote_mrplay ('v_pk as no,category_no,code,title,ticket,ticket_add');
+				$query = $this->vote_model->get_vote_mrplay ( 'v_pk as no,category_no,code,title,ticket,ticket_add' );
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						// print_r($row );
-						$data_cache [$cache_name] [] = array(
+						$data_cache [$cache_name] [] = array (
 								'code' => $row->code,
 								'title' => $row->title,
-								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) )
+								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) ) 
 						);
-						unset($row);
+						unset ( $row );
 					}
 				}
-				unset($query);
-				unset($sum);
+				unset ( $query );
+				unset ( $sum );
 				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
 			}
 			$this->data_result ['result'] = $data_cache [$cache_name];
