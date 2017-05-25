@@ -43,13 +43,13 @@ class Votes extends CI_Controller {
 			$this->load->model ( 'vidol_old/vote_model' );
 			// 1.統計投票總數(一個投票項目建一個數字)
 			$sum = array (
-					'1' => 0.00
+					'1' => 0
 			);
 			$query = $this->vote_model->get_vote_mrplay_sum ( 'category_no,title,SUM(ticket_add) as ticket_sum' );
 			if ($query->num_rows () > 0) {
 				foreach ( $query->result () as $row ) {
 					// print_r($row );
-					$sum [$row->category_no] = $row->ticket_sum;
+					$sum [$row->category_no] = $row->ticket_sum - 1;
 					unset ( $row );
 				}
 			}
