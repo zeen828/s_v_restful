@@ -78,6 +78,7 @@ class Votes extends CI_Controller {
 				$this->data_result ['debug'] ['data_cache'] = $data_cache;
 				$this->data_result ['debug'] ['cache_name'] = $cache_name;
 				$this->data_result ['debug'] ['cache_time'] = date ( 'Y-m-d h:i:s' );
+				$this->data_result ['debug'] ['sum'] = $sum;
 			}
 			unset ( $data_cache [$cache_name] );
 			unset ( $cache_name );
