@@ -31,6 +31,7 @@ class Votes extends REST_Controller {
 			// 變數
 			$data_input = array ();
 			$data_cache = array ();
+			$data_cache_time = (ENVIRONMENT == 'development')? 300 : 1800;//5分,30分
 			// 接收變數
 			$data_input ['cache'] = $this->get ( 'cache' );
 			$data_input ['debug'] = $this->get ( 'debug' );
@@ -79,7 +80,7 @@ class Votes extends REST_Controller {
 				}
 				unset ( $query );
 				unset ( $sum );
-				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
+				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], $data_cache_time ); // 24H
 			}
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
