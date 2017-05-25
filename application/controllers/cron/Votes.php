@@ -49,7 +49,7 @@ class Votes extends CI_Controller {
 			if ($query->num_rows () > 0) {
 				foreach ( $query->result () as $row ) {
 					// print_r($row );
-					$sum [$row->category_no] = $row->ticket_sum - 1;
+					$sum [$row->category_no] = $row->ticket_sum - 18;//有18個灌票員偷懶HOT CODE
 					unset ( $row );
 				}
 			}
