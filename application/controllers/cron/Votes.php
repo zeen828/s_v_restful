@@ -68,7 +68,6 @@ class Votes extends CI_Controller {
 				}
 			}
 			unset ( $query );
-			unset ( $sum );
 			$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 );// 24H
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
@@ -84,6 +83,7 @@ class Votes extends CI_Controller {
 			unset ( $cache_name );
 			unset ( $data_cache );
 			unset ( $data_input );
+			unset ( $sum );
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// 標記時間計算
