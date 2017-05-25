@@ -72,7 +72,7 @@ class Votes extends REST_Controller {
 						$data_cache [$cache_name] [] = array (
 								'code' => $row->code,
 								'title' => $row->title,
-								'ticket' => ($row->ticket_add <= 0 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) ) 
+								'ticket' => ($row->ticket_add <= 1 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) ) 
 						);
 						unset ( $row );
 					}
