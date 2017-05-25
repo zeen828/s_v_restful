@@ -31,7 +31,6 @@ class Votes extends REST_Controller {
 			// 變數
 			$data_input = array ();
 			$data_cache = array ();
-			$data_cache_time = (ENVIRONMENT == 'development')? 300 : 1800;//5分,30分
 			// 接收變數
 			$data_input ['cache'] = $this->get ( 'cache' );
 			$data_input ['debug'] = $this->get ( 'debug' );
@@ -48,40 +47,40 @@ class Votes extends REST_Controller {
 				$this->cache->memcached->delete ( $cache_name );
 			}
 			$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
-			if ($data_cache [$cache_name] == false) {
-				// 防止array組合型態錯誤警告
-				$data_cache [$cache_name] = array ();
-				$this->load->model ( 'vidol_old/vote_model' );
-				// 1.統計投票總數(一個投票項目建一個數字)
-				$sum = array (
-						'1' => 0.00 
-				);
-				$query = $this->vote_model->get_vote_mrplay_sum ( 'category_no,title,SUM(ticket_add) as ticket_sum' );
-				if ($query->num_rows () > 0) {
-					foreach ( $query->result () as $row ) {
-						// print_r($row );
-						$sum [$row->category_no] = $row->ticket_sum;
-						unset ( $row );
-					}
-				}
-				unset ( $query );
-				// 2.投票資料
-				$query = $this->vote_model->get_vote_mrplay ( 'v_pk as no,category_no,code,title,ticket,ticket_add' );
-				if ($query->num_rows () > 0) {
-					foreach ( $query->result () as $row ) {
-						// print_r($row );
-						$data_cache [$cache_name] [] = array (
-								'code' => $row->code,
-								'title' => $row->title,
-								'ticket' => ($row->ticket_add <= 1 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) ) 
-						);
-						unset ( $row );
-					}
-				}
-				unset ( $query );
-				unset ( $sum );
-				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], $data_cache_time ); // 24H
-			}
+// 			if ($data_cache [$cache_name] == false) {
+// 				// 防止array組合型態錯誤警告
+// 				$data_cache [$cache_name] = array ();
+// 				$this->load->model ( 'vidol_old/vote_model' );
+// 				// 1.統計投票總數(一個投票項目建一個數字)
+// 				$sum = array (
+// 						'1' => 0.00 
+// 				);
+// 				$query = $this->vote_model->get_vote_mrplay_sum ( 'category_no,title,SUM(ticket_add) as ticket_sum' );
+// 				if ($query->num_rows () > 0) {
+// 					foreach ( $query->result () as $row ) {
+// 						// print_r($row );
+// 						$sum [$row->category_no] = $row->ticket_sum;
+// 						unset ( $row );
+// 					}
+// 				}
+// 				unset ( $query );
+// 				// 2.投票資料
+// 				$query = $this->vote_model->get_vote_mrplay ( 'v_pk as no,category_no,code,title,ticket,ticket_add' );
+// 				if ($query->num_rows () > 0) {
+// 					foreach ( $query->result () as $row ) {
+// 						// print_r($row );
+// 						$data_cache [$cache_name] [] = array (
+// 								'code' => $row->code,
+// 								'title' => $row->title,
+// 								'ticket' => ($row->ticket_add <= 1 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) ) 
+// 						);
+// 						unset ( $row );
+// 					}
+// 				}
+// 				unset ( $query );
+// 				unset ( $sum );
+// 				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 );
+// 			}
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
