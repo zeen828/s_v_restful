@@ -18,7 +18,7 @@ class Votes extends CI_Controller {
 	public function index() {
 		show_404 ();
 	}
-
+	
 	/**
 	 * 統計投票數
 	 */
@@ -35,7 +35,7 @@ class Votes extends CI_Controller {
 			// memcached
 			$this->load->driver ( 'cache', array (
 					'adapter' => 'memcached',
-					'backup' => 'dummy'
+					'backup' => 'dummy' 
 			) );
 			$cache_name = sprintf ( '%s_%s_mrplay_result', ENVIRONMENT, 'vote' );
 			// 防止array組合型態錯誤警告
@@ -43,13 +43,13 @@ class Votes extends CI_Controller {
 			$this->load->model ( 'vidol_old/vote_model' );
 			// 1.統計投票總數(一個投票項目建一個數字)
 			$sum = array (
-					'1' => 0
+					'1' => 0 
 			);
 			$query = $this->vote_model->get_vote_mrplay_sum ( 'category_no,title,SUM(ticket_add) as ticket_sum' );
 			if ($query->num_rows () > 0) {
 				foreach ( $query->result () as $row ) {
 					// print_r($row );
-					$sum [$row->category_no] = $row->ticket_sum - 18;//有18個灌票員偷懶HOT CODE
+					$sum [$row->category_no] = $row->ticket_sum - 18; // 有18個灌票員偷懶HOT CODE
 					unset ( $row );
 				}
 			}
@@ -62,13 +62,13 @@ class Votes extends CI_Controller {
 					$data_cache [$cache_name] [] = array (
 							'code' => $row->code,
 							'title' => $row->title,
-							'ticket' => ($row->ticket_add <= 1 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', ($row->ticket_add / $sum [$row->category_no] * 100) )
+							'ticket' => ($row->ticket_add <= 1 || $sum [$row->category_no] <= 0) ? sprintf ( '%2.2f', 0 ) : sprintf ( '%2.2f', (($row->ticket_add - 1) / $sum [$row->category_no] * 100) ) 
 					);
 					unset ( $row );
 				}
 			}
 			unset ( $query );
-			$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 );// 24H
+			$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
