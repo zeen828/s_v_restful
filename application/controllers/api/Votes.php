@@ -47,6 +47,9 @@ class Votes extends REST_Controller {
 				$this->cache->memcached->delete ( $cache_name );
 			}
 			$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
+			if ($data_cache [$cache_name] == false) {
+				$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
+			}
 // 			if ($data_cache [$cache_name] == false) {
 // 				// 防止array組合型態錯誤警告
 // 				$data_cache [$cache_name] = array ();

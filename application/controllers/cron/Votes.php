@@ -68,7 +68,10 @@ class Votes extends CI_Controller {
 				}
 			}
 			unset ( $query );
-			$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
+			if(count($data_cache [$cache_name]) == 18){
+				$this->data_result ['debug'] ['save'] = true;
+				$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 86400 ); // 24H
+			}
 			$this->data_result ['result'] = $data_cache [$cache_name];
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
