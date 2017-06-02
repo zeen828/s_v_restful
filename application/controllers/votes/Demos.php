@@ -33,6 +33,8 @@ class Demos extends CI_Controller
 		if ($this->db->table_exists($table_name))
 		{
 			echo $table_name, "-O", "<br/>\n";
+		}else{
+			echo $table_name, "-X", "<br/>\n";
 			$this->db->add_field(array(
 					'id' => array(
 							'type' => 'int',
@@ -111,8 +113,6 @@ class Demos extends CI_Controller
 			));
 			$this->db->add_key('id', TRUE);
 			$this->db->create_table($table_name);
-		}else{
-			echo $table_name, "-X", "<br/>\n";
 		}
 		unset($table_name);
 		$table_list_name = sprintf($this->votes['table_list'], $this->votes['name']);
