@@ -28,11 +28,12 @@ class Demos extends CI_Controller
 	
 	public function install_db ()
 	{
+		$this->load->database ( 'vidol_old_write', TRUE );
 		$table_name = sprintf($this->votes['table'], $this->votes['name']);
 		if ($this->db->table_exists($table_name))
 		{
 			echo $table_name, "-O", "<br/>\n";
-			$this->dbforge->add_field(array(
+			$this->db->add_field(array(
 					'id' => array(
 							'type' => 'int',
 							'constraint' => 11,
@@ -108,8 +109,8 @@ class Demos extends CI_Controller
 							'comment' => '投票建立時間',
 					),
 			));
-			$this->dbforge->add_key('id', TRUE);
-			$this->dbforge->create_table($table_name);
+			$this->db->add_key('id', TRUE);
+			$this->db->create_table($table_name);
 		}else{
 			echo $table_name, "-X", "<br/>\n";
 		}
@@ -118,7 +119,7 @@ class Demos extends CI_Controller
 		if ($this->db->table_exists($table_list_name))
 		{
 			echo $table_list_name, "-O", "<br/>\n";
-			$this->dbforge->add_field(array(
+			$this->db->add_field(array(
 					'blog_id' => array(
 							'type' => 'INT',
 							'constraint' => 5,
@@ -134,8 +135,8 @@ class Demos extends CI_Controller
 							'null' => TRUE,
 					),
 			));
-			$this->dbforge->add_key('blog_id', TRUE);
-			$this->dbforge->create_table($table_list_name);
+			$this->db->add_key('blog_id', TRUE);
+			$this->db->create_table($table_list_name);
 		}else{
 			echo $table_list_name, "-X", "<br/>\n";
 		}
