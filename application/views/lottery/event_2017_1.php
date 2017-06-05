@@ -7,8 +7,47 @@
 <script type="text/javascript">
 var g_Interval = 1;//間隔
 var g_PersonCount = 20000;//人數
+var g_Lottery;//抽獎
+var g_LotteryList;//抽獎
 var g_Timer;//計時器
 var running = false;//
+function getLottery(){
+	$.ajax({
+		url: '/api/lottery/event_2017_1',
+		type: 'POST',
+		cache: false,
+		headers: {
+			//'Authorization' : 'sw84sc888kkcg0ogo8cw4swgkswkw048cc48swk8'
+		},
+		dataType: 'json',
+		data: {
+			'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZGVudGl0eSI6eyJpZCI6NDMyMDc0LCJ1aWQiOiJzM2dYR0JDbUYwIiwiZW1haWxfdmVyaWZpZWQiOnRydWV9LCJhcHBsaWNhdGlvbl9pZCI6MSwiZXhwaXJlc19hdCI6MTQ4NDcyODY3NiwicmFuZF9rZXkiOiI5NDA1ZGMwYmQxMGE2ZGMwMTA1NGFiZGI1ZjQ2NzVhMiJ9.0gF3EgZhHHnxoZdWDqM4UBlCEKR9EPaW0qSFZrRsRuBlfgxhEqb_qR2vQzGdoLeC8bdAaIl1MC_2s7xE8wjMxQ',
+			'vip' : '1',
+			'start' : '2017-06-01',
+			'end' : '2017-06-07',
+			'cache' : '',
+			'debug' : 'debug'
+		},
+		error: function(xhr){
+			alert('Ajax request error');
+		},
+		success: function(response) {
+			console.log('Ajax OK');
+			console.log(response);
+		},
+		statusCode: {
+			200: function(json, statusText, xhr) {
+				console.log('Ajax OK');
+				console.log('json');
+				console.log(json);
+				console.log('statusText');
+				console.log(statusText);
+				console.log('xhr');
+				console.log(xhr);
+			}
+		}
+	});
+}
 function beginRndNum(trigger){
 	console.log('beginRndNum-開始&停止');
 	if(running){
@@ -18,6 +57,7 @@ function beginRndNum(trigger){
 		$('#ResultNum').css('color','red');
 	}
 	else{
+		getLottery();
 		running = true;
 		$('#ResultNum').css('color','black');
 		$(trigger).val("停止");
