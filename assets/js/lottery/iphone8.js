@@ -1,27 +1,20 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Vidol 抽獎活動</title>
-<script type="text/javascript" src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
-<script type="text/javascript">
 var g_Interval = 1;//間隔
-var g_PersonCount = 20000;//人數
 var g_Lottery = [];//抽獎
-var g_LotteryList = <?php echo json_encode($lottery);?>;//預設抽獎名單避免AJAX錯誤沒名單
+var g_LotteryList = [];//預設抽獎名單避免AJAX錯誤沒名單
 var g_Timer;//計時器
 var running = false;
-function getLottery(){
+var start_date = '';
+var end_date = ''
+function getLottery(start_date, end_date){
 	$.ajax({
-		url: '/api/lottery/event_2017_1',
+		url: '/api/lottery/iphone8',
 		type: 'POST',
 		cache: false,
 		dataType: 'json',
 		data: {
 			'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZGVudGl0eSI6eyJpZCI6NDMyMDc0LCJ1aWQiOiJzM2dYR0JDbUYwIiwiZW1haWxfdmVyaWZpZWQiOnRydWV9LCJhcHBsaWNhdGlvbl9pZCI6MSwiZXhwaXJlc19hdCI6MTQ4NDcyODY3NiwicmFuZF9rZXkiOiI5NDA1ZGMwYmQxMGE2ZGMwMTA1NGFiZGI1ZjQ2NzVhMiJ9.0gF3EgZhHHnxoZdWDqM4UBlCEKR9EPaW0qSFZrRsRuBlfgxhEqb_qR2vQzGdoLeC8bdAaIl1MC_2s7xE8wjMxQ',
-			'tag' : '<?php echo $tag;?>',
-			'start' : '<?php echo $start;?>',
-			'end' : '<?php echo $end;?>'
+			'start' : start_date,
+			'end' : end_date
 		},
 		error: function(xhr){
 			alert('Ajax request error');
@@ -37,7 +30,6 @@ function getLottery(){
 	});
 }
 
-//物件隨機取一個元素
 function getRandomArrayElements(arr, count) {
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
     while (i-- > min) {
@@ -50,10 +42,7 @@ function getRandomArrayElements(arr, count) {
 }
 
 function beginRndNum(trigger){
-	console.log('beginRndNum-開始&停止');
 	if(running){
-		//開獎
-		console.log('開獎');
 		if(g_Lottery.length >= 1){
 			var user = getRandomArrayElements(g_Lottery, 1);
 			$('#ResultNum').html(user[0].member_id);
@@ -62,8 +51,7 @@ function beginRndNum(trigger){
 		clearTimeout(g_Timer);
 		$(trigger).val("開始");
 		$('#ResultNum').css('color','red');
-	}
-	else{
+	}else{
 		getLottery();
 		running = true;
 		$('#ResultNum').css('color','black');
@@ -85,58 +73,3 @@ function beat() {
 	g_Timer = setTimeout(beat, g_Interval);
 	updateRndNum();
 }
-</script>
-</head>
-<body>
-	<style type="text/css">
-body {
-	background-color: #fff;
-	text-align: center;
-	padding-top: 50px;
-}
-
-#Result {
-	border: 3px solid #40AA53;
-	margin: 0 auto;
-	text-align: center;
-	width: 400px;
-	padding: 50px 0;
-	background: #efe;
-}
-
-#ResultNum {
-	font-size: 50pt;
-	font-family: Verdana
-}
-
-#Button {
-	margin: 50px 0 0 0;
-}
-
-#Button input {
-	font-size: 40px;
-	padding: 0 50px;
-}
-
-#btn {
-	background-color: #40AA53;
-	border: 1px solid #40AA53;
-	width: 20%;
-	height: 45px;
-	margin: 0em auto;
-	font-size: 1em;
-	border-radius: 2.5px;
-	-moz-border-radius: 2.5px;
-	-webkit-border-radius: 2.5px;
-	color: #FFF;
-}
-</style>
-	<h1 style="color: #40AA53">抽獎結果</h1>
-	<div id="Result" style="color: #40AA53">
-		<span id="ResultNum">Vidol</span>
-	</div>
-	<div id="Button">
-		<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' />
-	</div>
-</body>
-</html>
