@@ -71,8 +71,7 @@ function beginRndNum(trigger){
 
 function updateRndNum(){
 	var user = getRandomArrayElements(g_LotteryList, 1);
-	console.log(user);
-	$('#ResultNum').html('');
+	$('#ResultNum').html(user[0]._id);
 }
 
 function beginTimer(){
