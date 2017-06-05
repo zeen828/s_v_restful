@@ -32,18 +32,18 @@ class Lottery extends REST_Controller {
 			$data_input ['start'] = $this->post ( 'start' ); // 開始時間
 			$data_input ['end'] = $this->post ( 'end' ); // 結束時間
 			$data_input ['cache'] = $this->post ( 'cache' ); // cache暫存
-			$data_input ['debug'] = $this->get ( 'debug' );
+			$data_input ['debug'] = $this->post ( 'debug' );
 			//
 			$this->load->driver ( 'cache', array (
 					'adapter' => 'memcached',
 					'backup' => 'dummy' 
 			) );
 			//mysql
-			$vip = array('will', 'sun');
-			$this->data_result ['vip'] = $vip;
+			$lottery = array('will', 'sun');
+			$this->data_result ['lottery'] = $lottery;
 			//mongo
-			$user = array('qazwsx', '123456', 'qaz123', 'wsx123');
-			$this->data_result ['user'] = $user;
+			$lottery_list = array('qazwsx', '123456', 'qaz123', 'wsx123');
+			$this->data_result ['lottery_list'] = $lottery_list;
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
