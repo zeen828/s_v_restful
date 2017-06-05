@@ -4,12 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Events extends CI_Controller
 {
 	// 投票資料
-	private $votes = array(
-			'title' => '投票範例',//投票標題
-			'name' => 'demos',//投票名稱
-			'table' => 'vote_%s_tbl',//投票資料庫使用表單
-			'table_count' => 'vote_%s_count_tbl',//投票資料庫使用表單
-			'table_list' => 'vote_%s_list_tbl',//投票統計資料庫使用表單
+	private $lottery = array(
+			'title' => 'Iphone 8 抽獎',//投票標題
+			'name' => 'iphone8',//投票名稱
+			'table' => 'lottery_%s_tbl',//
+			'table_list' => 'lottery_%s_list_tbl',//
 	);
 	// 回傳資料
 	private $data_view;
@@ -23,8 +22,7 @@ class Events extends CI_Controller
 
 	public function index ()
 	{
-		echo '投票首頁';
-		var_dump($this->votes);
+		var_dump($this->lottery);
 		// 輸出view
 		$this->load->view ( 'lottery/event_2017_1', $this->data_view );
 	}

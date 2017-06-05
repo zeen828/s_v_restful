@@ -6,14 +6,15 @@
 <script type="text/javascript" src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
 <script type="text/javascript">
 var g_Interval = 1;
-var g_PersonCount = 500;//参加抽奖人数
+var g_PersonCount = 20000;//参加抽奖人数
 var g_Timer;
 var running = false;
 function beginRndNum(trigger){
+	consolr.log('beginRndNum');
 	if(running){
 		running = false;
 		clearTimeout(g_Timer);		
-		$(trigger).val("开始");
+		$(trigger).val("開始");
 		$('#ResultNum').css('color','red');
 	}
 	else{
@@ -25,15 +26,18 @@ function beginRndNum(trigger){
 }
 
 function updateRndNum(){
+	consolr.log('updateRndNum');
 	var num = Math.floor(Math.random()*g_PersonCount+1);
 	$('#ResultNum').html(num);
 }
 
 function beginTimer(){
+	consolr.log('beginTimer');
 	g_Timer = setTimeout(beat, g_Interval);
 }
 
 function beat() {
+	consolr.log('beat');
 	g_Timer = setTimeout(beat, g_Interval);
 	updateRndNum();
 }
