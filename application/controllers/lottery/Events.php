@@ -37,7 +37,7 @@ class Events extends CI_Controller {
 			$data_date ['end_utc'] = date ( "Y-m-d H:i:s", strtotime ( $data_date ['end'] . "-8 hour" ) );
 			var_dump($data_date);
 			//
-			$this->mongo_db->where_between('_created_at', $data_date ['start_utc'], $data_date ['end_utc']);
+			//$this->mongo_db->where_between('_created_at', $data_date ['start_utc'], $data_date ['end_utc']);
 		}
 		$user = $this->mongo_db->select(array('_id', 'member_id'))->get('_User');
 		//var_dump($user);
