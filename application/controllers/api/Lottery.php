@@ -17,7 +17,7 @@ class Lottery extends REST_Controller {
 	public function index_get() {
 		$this->response ( NULL, 404 );
 	}
-	public function event_2017_1_get() {
+	public function event_2017_1_post() {
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
@@ -25,8 +25,11 @@ class Lottery extends REST_Controller {
 			$data_input = array ();
 			$data_cache = array ();
 			// 接收變數
-			$data_input ['cache'] = $this->get ( 'cache' );
-			$data_input ['debug'] = $this->get ( 'debug' );
+			$data_input ['vip'] = $this->post ( 'vip' );//
+			$data_input ['start'] = $this->post ( 'start' );//開始時間
+			$data_input ['end'] = $this->post ( 'end' );//結束時間
+			$data_input ['cache'] = $this->post ( 'cache' );//cache暫存
+			$data_input ['debug'] = $this->post ( 'debug' );
 			//
 			$this->load->driver ( 'cache', array (
 					'adapter' => 'memcached',
