@@ -25,16 +25,23 @@ class Lottery extends REST_Controller {
 			$data_input = array ();
 			$data_cache = array ();
 			// 接收變數
-			$data_input ['vip'] = $this->post ( 'vip' );//
-			$data_input ['start'] = $this->post ( 'start' );//開始時間
-			$data_input ['end'] = $this->post ( 'end' );//結束時間
-			$data_input ['cache'] = $this->post ( 'cache' );//cache暫存
-			$data_input ['debug'] = $this->post ( 'debug' );
+			$data_input ['vip'] = $this->post ( 'vip' ); //
+			$data_input ['start'] = $this->post ( 'start' ); // 開始時間
+			$data_input ['end'] = $this->post ( 'end' ); // 結束時間
+			$data_input ['cache'] = $this->post ( 'cache' ); // cache暫存
+			$data_input ['debug'] = $this->get ( 'debug' );
 			//
 			$this->load->driver ( 'cache', array (
 					'adapter' => 'memcached',
 					'backup' => 'dummy' 
 			) );
+			// DEBUG印出
+			if ($data_input ['debug'] == 'debug') {
+				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
+				$this->data_result ['debug'] ['data_input'] = $data_input;
+				$this->data_result ['debug'] ['data_cache'] = $data_cache;
+				$this->data_result ['debug'] ['cache_time'] = date ( 'Y-m-d h:i:s' );
+			}
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			$this->data_result ['time'] = $this->benchmark->elapsed_time ( 'code_start', 'code_end' );
