@@ -129,7 +129,7 @@ body {
 </style>
 	<h1 style="color: #40AA53">抽獎結果</h1>
 	<div id="Result" style="color: #40AA53">
-		<span id="ResultNum">0</span>
+		<span id="ResultNum">Vidol</span>
 	</div>
 	<div id="Button">
 		<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' />
