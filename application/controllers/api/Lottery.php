@@ -2,7 +2,7 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 ini_set ( "display_errors", "On" ); // On, Off
 require APPPATH . '/libraries/REST_Controller.php';
-class Votes extends REST_Controller {
+class Lottery extends REST_Controller {
 	private $data_debug;
 	private $data_result;
 	public function __construct() {
@@ -17,7 +17,7 @@ class Votes extends REST_Controller {
 	public function index_get() {
 		$this->response ( NULL, 404 );
 	}
-	public function mrplay_get() {
+	public function event_2017_1_get() {
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );

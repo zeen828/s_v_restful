@@ -18,7 +18,7 @@ class Events extends CI_Controller {
 	public function index() {
 		show_404();
 	}
-	public function event_2017_01() {
+	public function event_2017_1() {
 		var_dump ( $this->lottery );
 		// 輸出view
 		$this->load->view ( 'lottery/event_2017_1', $this->data_view );
