@@ -65,10 +65,8 @@ function getRandomArrayElements(arr, count) {
 function beginRndNum(trigger){
 	console.log('beginRndNum-開始&停止');
 	if(running){
-
-		var items = ['1','2','4','5','6','7','8','9','10'];
-		console.log( getRandomArrayElements(g_LotteryList, 4) );
-		
+		//開獎
+		console.log('開獎');
 		running = false;
 		clearTimeout(g_Timer);		
 		$(trigger).val("開始");
@@ -84,19 +82,15 @@ function beginRndNum(trigger){
 }
 
 function updateRndNum(){
-	console.log('updateRndNum-更新');
-	//var num = Math.floor(Math.random()*g_PersonCount+1);
-	var num = getRandomArrayElements(g_LotteryList, 1);
-	$('#ResultNum').html(num);
+	var member_id = getRandomArrayElements(g_LotteryList, 1);
+	$('#ResultNum').html(member_id);
 }
 
 function beginTimer(){
-	console.log('beginTimer-開始計時器');
 	g_Timer = setTimeout(beat, g_Interval);
 }
 
 function beat() {
-	console.log('beat-');
 	g_Timer = setTimeout(beat, g_Interval);
 	updateRndNum();
 }
