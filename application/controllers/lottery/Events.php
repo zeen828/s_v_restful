@@ -22,8 +22,8 @@ class Events extends CI_Controller {
 		//
 		$this->load->library('mongo_db');
 		
-		//$this->mongo_db->limit();
-		$this->mongo_db->offset($user_count);
+		$this->mongo_db->limit(100);
+		$this->mongo_db->offset(1);
 		$this->mongo_db->select('member_id');
 		//$this->mongo_db->order_by(array('_created_at'=>'asc'));
 		$user = $this->mongo_db->get('_User');
