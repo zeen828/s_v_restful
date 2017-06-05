@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Vidol 抽獎活動</title>
 <script type="text/javascript" src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="/assets/js/lottery/iphone8.js"></script>
+<script type="text/javascript" src="/assets/js/lottery/iphone8.js?<?php echo time();?>"></script>
 <script type="text/javascript">
 g_LotteryList = <?php echo json_encode($lottery);?>;//預設抽獎名單避免AJAX錯誤沒名單
 start_date = '<?php echo $start;?>';

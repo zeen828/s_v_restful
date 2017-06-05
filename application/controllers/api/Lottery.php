@@ -76,9 +76,8 @@ class Lottery extends REST_Controller {
 			$data_input ['member_id '] = $this->post ( 'member_id ' );
 			$data_input ['debug'] = $this->post ( 'debug' );
 			// mysql
-			$query = $this->lottery_model->add_lottery_list ( $data_input ['mongo_id '], $data_input ['member_id '] );
+			$this->data_result ['result'] = $this->lottery_model->add_lottery_list ( $data_input ['mongo_id '], $data_input ['member_id '] );
 			unset ( $query );
-			$this->data_result ['lottery'] = $lottery;
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
