@@ -70,18 +70,17 @@ function getRandomArrayElements(arr, count) {
 function beginRndNum(trigger){
 	if(running){
 		var lottery = $('#ResultNum').html();
-		if($.inArray(lottery, g_LotteryArray)){
+		if($.inArray(lottery, g_LotteryArray) != -1){
 			beginTimer();
 		}
 		if(g_Lottery.length >= 1){
 			var user = getRandomArrayElements(g_Lottery, 1);
 			$('#ResultNum').html(user[0].member_id);
 		}
-		//
-		g_LotteryArray.push($('#ResultNum').html());
 		running = false;
 		clearTimeout(g_Timer);
 		writeLotteryList();//
+		g_LotteryArray.push($('#ResultNum').html());
 		$(trigger).val("開始");
 		$('#ResultNum').css('color','red');
 	}else{
