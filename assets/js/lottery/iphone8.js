@@ -70,12 +70,13 @@ function getRandomArrayElements(arr, count) {
 function beginRndNum(trigger){
 	if(running){
 		var lottery = $('#ResultNum').html();
-		if($.inArray(lottery, g_LotteryArray) != -1){
-			beginTimer();
-		}
 		if(g_Lottery.length >= 1){
 			var user = getRandomArrayElements(g_Lottery, 1);
 			$('#ResultNum').html(user[0].member_id);
+		}
+		//
+		if($.inArray(lottery, g_LotteryArray) != -1){
+			beginTimer();
 		}
 		running = false;
 		clearTimeout(g_Timer);
