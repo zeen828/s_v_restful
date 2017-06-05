@@ -8,6 +8,7 @@ class Demos extends CI_Controller
 			'title' => '投票範例',//投票標題
 			'name' => 'demos',//投票名稱
 			'table' => 'vote_%s_tbl',//投票資料庫使用表單
+			'table_count' => 'vote_%s_count_tbl',//投票資料庫使用表單
 			'table_list' => 'vote_%s_list_tbl',//投票統計資料庫使用表單
 	);
 	// 回傳資料
