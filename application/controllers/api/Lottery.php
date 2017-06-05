@@ -24,9 +24,12 @@ class Lottery extends REST_Controller {
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
+			//
+			$this->load->database('vidol_old_read', TRUE);
 			// 變數
 			$data_input = array ();
 			$data_cache = array ();
+			$lottery = array();
 			// 接收變數
 			$data_input ['vip'] = $this->post ( 'vip' ); //
 			$data_input ['start'] = $this->post ( 'start' ); // 開始時間
@@ -38,9 +41,20 @@ class Lottery extends REST_Controller {
 					'adapter' => 'memcached',
 					'backup' => 'dummy' 
 			) );
-			//mysql
-			$lottery = array('will', 'sun');
-			$this->data_result ['lottery'] = $lottery;
+			//
+			if($data_input ['vip'] == 1){
+				//mysql
+				$query = $this->db->get('lottery_iphone_tbl');
+				if ($query->num_rows () > 0) {
+					foreach ( $query->result () as $row ) {
+						$lottery[] = array(
+								'_id'=>$row->mongo_id ,
+								'member_id'=>$row->member_id ,
+						);
+					}
+				}
+				$this->data_result ['lottery'] = $lottery;
+			}
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
