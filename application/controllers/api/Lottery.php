@@ -17,6 +17,9 @@ class Lottery extends REST_Controller {
 	public function index_get() {
 		$this->response ( NULL, 404 );
 	}
+	public function event_2017_1_get() {
+		$this->event_2017_1_post ();
+	}
 	public function event_2017_1_post() {
 		try {
 			// 開始時間標記
