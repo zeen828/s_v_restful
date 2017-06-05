@@ -74,6 +74,7 @@ function beginRndNum(trigger){
 		}
 		running = false;
 		clearTimeout(g_Timer);
+		writeLotteryList();//
 		$(trigger).val("開始");
 		$('#ResultNum').css('color','red');
 	}else{
