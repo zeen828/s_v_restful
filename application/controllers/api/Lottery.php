@@ -28,21 +28,12 @@ class Lottery extends REST_Controller {
 			$this->load->database('vidol_old_read', TRUE);
 			// 變數
 			$data_input = array ();
-			$data_cache = array ();
 			$lottery = array();
 			// 接收變數
-			$data_input ['vip'] = $this->post ( 'vip' ); //
-			$data_input ['start'] = $this->post ( 'start' ); // 開始時間
-			$data_input ['end'] = $this->post ( 'end' ); // 結束時間
-			$data_input ['cache'] = $this->post ( 'cache' ); // cache暫存
+			$data_input ['tag'] = $this->post ( 'tag' ); //
 			$data_input ['debug'] = $this->post ( 'debug' );
 			//
-			$this->load->driver ( 'cache', array (
-					'adapter' => 'memcached',
-					'backup' => 'dummy' 
-			) );
-			//
-			if($data_input ['vip'] == 1){
+			if($data_input ['tag'] == 1){
 				//mysql
 				$query = $this->db->get('lottery_iphone_tbl');
 				if ($query->num_rows () > 0) {
@@ -53,8 +44,8 @@ class Lottery extends REST_Controller {
 						);
 					}
 				}
-				$this->data_result ['lottery'] = $lottery;
 			}
+			$this->data_result ['lottery'] = $lottery;
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
