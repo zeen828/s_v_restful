@@ -20,7 +20,15 @@ class Lottery_model extends CI_Model {
 		// echo $this->r_db->last_query();
 		return $query;
 	}
-	public function add_lottery_list($mongo_id, $member_id) {
+	public function update_lottery($member_id) {
+		$this->w_db->set ( 'status', '0' );
+		$this->w_db->where ( 'member_id', $member_id );
+		$this->w_db->update ( 'lottery_iphone_tbl' );
+		$result = $this->w_db->affected_rows ();
+		// echo $this->w_db->last_query();
+		return $result;
+	}
+	public function insert_lottery_list($mongo_id, $member_id) {
 		$this->w_db->set ( 'mongo_id', $mongo_id );
 		$this->w_db->set ( 'member_id', $member_id );
 		$this->w_db->insert ( 'lottery_iphone_list_tbl' );
