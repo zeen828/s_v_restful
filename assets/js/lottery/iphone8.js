@@ -76,7 +76,8 @@ function beginRndNum(trigger){
 		//
 		var lottery = $('#ResultNum').html();
 		if($.inArray(lottery, g_LotteryArray) != -1){
-			beginTimer();
+			var user = getRandomArrayElements(g_LotteryList, 1);
+			$('#ResultNum').html(user[0].member_id);
 		}
 		running = false;
 		clearTimeout(g_Timer);
