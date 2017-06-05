@@ -85,7 +85,8 @@ function beginRndNum(trigger){
 
 function updateRndNum(){
 	console.log('updateRndNum-更新');
-	var num = Math.floor(Math.random()*g_PersonCount+1);
+	//var num = Math.floor(Math.random()*g_PersonCount+1);
+	var num = getRandomArrayElements(g_LotteryList, 1);
 	$('#ResultNum').html(num);
 }
 
