@@ -26,7 +26,7 @@ class Events extends CI_Controller {
 		//取得mongo會員
 		$this->mongo_db->limit(200);
 		$this->mongo_db->offset(1);
-		if(!empty($date) || 1){
+		if(!empty($date)){
 			// 開始時間
 			$data_date ['start_time'] = strtotime ( $date . "-1 hour" );
 			$data_date ['start'] = date ( "Y-m-d 00:00:00", $data_date ['start_time'] );
