@@ -25,7 +25,7 @@ class Lottery extends REST_Controller {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
 			//
-			$this->load->database('vidol_old_read', TRUE);
+			$this->load->model ( 'vidol_old/lottery_model' );
 			// 變數
 			$data_input = array ();
 			$lottery = array();
@@ -35,7 +35,7 @@ class Lottery extends REST_Controller {
 			//
 			if($data_input ['tag'] == 1){
 				//mysql
-				$query = $this->db->get('lottery_iphone_tbl');
+				$query = $this->lottery_model->get_lottery();
 				if ($query->num_rows () > 0) {
 					foreach ( $query->result () as $row ) {
 						$lottery[] = array(
