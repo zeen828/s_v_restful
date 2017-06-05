@@ -26,13 +26,13 @@ function beginRndNum(trigger){
 }
 
 function updateRndNum(){
-	console.log('updateRndNum');
+	console.log('updateRndNum-更新值');
 	var num = Math.floor(Math.random()*g_PersonCount+1);
 	$('#ResultNum').html(num);
 }
 
 function beginTimer(){
-	console.log('beginTimer');
+	console.log('beginTimer-停止');
 	g_Timer = setTimeout(beat, g_Interval);
 }
 
