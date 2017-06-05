@@ -70,8 +70,9 @@ function beginRndNum(trigger){
 }
 
 function updateRndNum(){
-	var member_id = getRandomArrayElements(g_LotteryList, 1);
-	$('#ResultNum').html(member_id._id);
+	var user = getRandomArrayElements(g_LotteryList, 1);
+	console.log(user);
+	$('#ResultNum').html(user._id);
 }
 
 function beginTimer(){
