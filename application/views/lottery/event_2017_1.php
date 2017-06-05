@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>jQuery数字随机滚动抽奖特效代码 - JS代码网</title>
+<title>Vidol 抽獎活動</title>
 <script type="text/javascript" src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
 <script type="text/javascript">
-var g_Interval = 1;
-var g_PersonCount = 20000;//参加抽奖人数
-var g_Timer;
-var running = false;
+var g_Interval = 1;//間隔
+var g_PersonCount = 20000;//人數
+var g_Timer;//計時器
+var running = false;//
 function beginRndNum(trigger){
 	console.log('beginRndNum-開始&停止');
 	if(running){
@@ -87,12 +87,12 @@ body {
 	color: #FFF;
 }
 </style>
-	<h1 style="color: #40AA53">抽奖结果</h1>
+	<h1 style="color: #40AA53">抽獎結果</h1>
 	<div id="Result" style="color: #40AA53">
 		<span id="ResultNum">0</span>
 	</div>
 	<div id="Button">
-		<input type='button' id="btn" value='开始' onclick='beginRndNum(this)' />
+		<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' />
 	</div>
 </body>
 </html>
