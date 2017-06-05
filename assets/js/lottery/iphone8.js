@@ -8,7 +8,7 @@ var end_date = ''
 function getLottery(start_date, end_date){
 	$.ajax({
 		url: '/api/lottery/iphone8',
-		type: 'POST',
+		type: 'GET',
 		cache: false,
 		dataType: 'json',
 		data: {
@@ -17,7 +17,7 @@ function getLottery(start_date, end_date){
 			'end' : end_date
 		},
 		error: function(xhr){
-			alert('Ajax request error');
+			console.log('Ajax request error');
 		},
 		success: function(response) {
 			console.log('Ajax OK');
@@ -25,6 +25,31 @@ function getLottery(start_date, end_date){
 		statusCode: {
 			200: function(json, statusText, xhr) {
 				g_Lottery = json.lottery;
+			}
+		}
+	});
+}
+
+function writeLotteryList(){
+	$.ajax({
+		url: '/api/lottery/iphone8',
+		type: 'POST',
+		cache: false,
+		dataType: 'json',
+		data: {
+			'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZGVudGl0eSI6eyJpZCI6NDMyMDc0LCJ1aWQiOiJzM2dYR0JDbUYwIiwiZW1haWxfdmVyaWZpZWQiOnRydWV9LCJhcHBsaWNhdGlvbl9pZCI6MSwiZXhwaXJlc19hdCI6MTQ4NDcyODY3NiwicmFuZF9rZXkiOiI5NDA1ZGMwYmQxMGE2ZGMwMTA1NGFiZGI1ZjQ2NzVhMiJ9.0gF3EgZhHHnxoZdWDqM4UBlCEKR9EPaW0qSFZrRsRuBlfgxhEqb_qR2vQzGdoLeC8bdAaIl1MC_2s7xE8wjMxQ',
+			'mongo_id' : $('#ResultNum').html(),
+			'member_id' : $('#ResultNum').html()
+		},
+		error: function(xhr){
+			console.log('Ajax request error');
+		},
+		success: function(response) {
+			console.log('Ajax OK');
+		},
+		statusCode: {
+			200: function(json, statusText, xhr) {
+				console.log('Ajax OK 200');
 			}
 		}
 	});
