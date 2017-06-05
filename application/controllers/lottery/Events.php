@@ -21,15 +21,14 @@ class Events extends CI_Controller {
 	public function event_2017_1($vip = 0) {
 		//
 		$this->load->library('mongo_db');
-		//
+		//取得mongo會員
 		$this->mongo_db->limit(100);
 		$this->mongo_db->offset(1);
 		//$this->mongo_db->order_by(array('_created_at'=>'asc'));
 		$user = $this->mongo_db->select(array('_id', 'member_id'))->get('_User');
-		var_dump($user);
-		
+		//var_dump($user);
 		$this->data_view['vip'] = $vip;
-		$this->data_view['lottery'] = array('qazwsx', '123456', 'qaz123', 'wsx123');
+		$this->data_view['lottery'] = $user;
 		// 輸出view
 		$this->load->view ( 'lottery/event_2017_1', $this->data_view );
 	}
