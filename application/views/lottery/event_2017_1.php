@@ -33,11 +33,7 @@ function getLottery(){
 			200: function(json, statusText, xhr) {
 				if(json.lottery.length > 0){
 					g_Lottery = json.lottery;
-					var user = getRandomArrayElements(g_Lottery, 1);
-					$('#ResultNum').html(user[0].member_id);
 				}
-				running = false;
-				clearTimeout(g_Timer);
 			}
 		}
 	});
@@ -60,9 +56,10 @@ function beginRndNum(trigger){
 	if(running){
 		//開獎
 		console.log('開獎');
-		getLottery();
-		//running = false;
-		//clearTimeout(g_Timer);
+		var user = getRandomArrayElements(g_Lottery, 1);
+		$('#ResultNum').html(user[0].member_id);
+		running = false;
+		clearTimeout(g_Timer);
 		$(trigger).val("開始");
 		$('#ResultNum').css('color','red');
 	}
