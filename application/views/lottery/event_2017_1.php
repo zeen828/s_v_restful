@@ -31,9 +31,7 @@ function getLottery(){
 		},
 		statusCode: {
 			200: function(json, statusText, xhr) {
-				if(json.lottery.length > 0){
-					g_Lottery = json.lottery;
-				}
+				g_Lottery = json.lottery;
 			}
 		}
 	});
