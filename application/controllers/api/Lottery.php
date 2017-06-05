@@ -41,9 +41,6 @@ class Lottery extends REST_Controller {
 			//mysql
 			$lottery = array('will', 'sun');
 			$this->data_result ['lottery'] = $lottery;
-			//mongo
-			$lottery_list = array('qazwsx', '123456', 'qaz123', 'wsx123');
-			$this->data_result ['lottery_list'] = $lottery_list;
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
