@@ -21,12 +21,11 @@ class Events extends CI_Controller {
 	public function event_2017_1($vip = 0) {
 		//
 		$this->load->library('mongo_db');
-		
+		//
 		$this->mongo_db->limit(100);
 		$this->mongo_db->offset(1);
-		$this->mongo_db->select('member_id');
 		//$this->mongo_db->order_by(array('_created_at'=>'asc'));
-		$user = $this->mongo_db->get('_User');
+		$user = $this->mongo_db->select(array('_id', 'member_id'))->get('_User');
 		var_dump($user);
 		
 		$this->data_view['vip'] = $vip;
