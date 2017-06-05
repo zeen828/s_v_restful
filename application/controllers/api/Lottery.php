@@ -38,6 +38,12 @@ class Lottery extends REST_Controller {
 					'adapter' => 'memcached',
 					'backup' => 'dummy' 
 			) );
+			//mysql
+			$vip = array('will', 'sun');
+			$this->data_result ['vip'] = $vip;
+			//mongo
+			$user = array('qazwsx', '123456', 'qaz123', 'wsx123');
+			$this->data_result ['user'] = $user;
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
