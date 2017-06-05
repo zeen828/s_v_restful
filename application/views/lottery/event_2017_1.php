@@ -7,7 +7,7 @@
 <script type="text/javascript">
 var g_Interval = 1;//間隔
 var g_PersonCount = 20000;//人數
-var g_Lottery;//抽獎
+var g_Lottery = [];//抽獎
 var g_LotteryList = <?php echo json_encode($lottery);?>;//預設抽獎名單避免AJAX錯誤沒名單
 var g_Timer;//計時器
 var running = false;
