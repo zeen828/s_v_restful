@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Vidol 抽獎活動</title>
@@ -8,9 +8,9 @@
 var g_Interval = 1;//間隔
 var g_PersonCount = 20000;//人數
 var g_Lottery;//抽獎
-var g_LotteryList = <?php echo json_encode($lottery);?>;//抽獎
+var g_LotteryList = <?php echo json_encode($lottery);?>;//預設抽獎名單避免AJAX錯誤沒名單
 var g_Timer;//計時器
-var running = false;//
+var running = false;
 function getLottery(){
 	$.ajax({
 		url: '/api/lottery/event_2017_1',
@@ -21,9 +21,7 @@ function getLottery(){
 			'token' : 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpZGVudGl0eSI6eyJpZCI6NDMyMDc0LCJ1aWQiOiJzM2dYR0JDbUYwIiwiZW1haWxfdmVyaWZpZWQiOnRydWV9LCJhcHBsaWNhdGlvbl9pZCI6MSwiZXhwaXJlc19hdCI6MTQ4NDcyODY3NiwicmFuZF9rZXkiOiI5NDA1ZGMwYmQxMGE2ZGMwMTA1NGFiZGI1ZjQ2NzVhMiJ9.0gF3EgZhHHnxoZdWDqM4UBlCEKR9EPaW0qSFZrRsRuBlfgxhEqb_qR2vQzGdoLeC8bdAaIl1MC_2s7xE8wjMxQ',
 			'vip' : '<?php echo $vip;?>',
 			'start' : '2017-06-01',
-			'end' : '2017-06-07',
-			'cache' : '',
-			'debug' : 'debug'
+			'end' : '2017-06-07'
 		},
 		error: function(xhr){
 			alert('Ajax request error');
@@ -39,6 +37,7 @@ function getLottery(){
 	});
 }
 
+//物件隨機取一個元素
 function getRandomArrayElements(arr, count) {
     var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
     while (i-- > min) {
@@ -56,7 +55,7 @@ function beginRndNum(trigger){
 		//開獎
 		console.log('開獎');
 		running = false;
-		clearTimeout(g_Timer);		
+		clearTimeout(g_Timer);
 		$(trigger).val("開始");
 		$('#ResultNum').css('color','red');
 	}
