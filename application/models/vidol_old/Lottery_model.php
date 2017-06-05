@@ -15,6 +15,7 @@ class Lottery_model extends CI_Model {
 		// parent::__destruct();
 	}
 	public function get_lottery() {
+		$this->r_db->where ( 'status', '1' );
 		$query = $this->r_db->get ( 'lottery_iphone_tbl' );
 		// echo $this->r_db->last_query();
 		return $query;
