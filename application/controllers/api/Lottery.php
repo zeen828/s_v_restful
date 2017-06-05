@@ -17,42 +17,38 @@ class Lottery extends REST_Controller {
 	public function index_get() {
 		$this->response ( NULL, 404 );
 	}
-	public function event_2017_1_get() {
-		$this->event_2017_1_post ();
-	}
-	public function event_2017_1_post() {
+	public function iphone8_post() {
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
-			//
+			// 引用
 			$this->load->model ( 'vidol_old/lottery_model' );
 			// 變數
 			$data_input = array ();
 			$lottery = array();
 			// 接收變數
-			$data_input ['tag'] = $this->post ( 'tag' ); //
 			$data_input ['debug'] = $this->post ( 'debug' );
-			//
-			if($data_input ['tag'] == 1){
-				//mysql
-				$query = $this->lottery_model->get_lottery();
-				if ($query->num_rows () > 0) {
-					foreach ( $query->result () as $row ) {
-						$lottery[] = array(
-								'_id'=>$row->mongo_id ,
-								'member_id'=>$row->member_id ,
-						);
-					}
+			//mysql
+			$query = $this->lottery_model->get_lottery();
+			if ($query->num_rows () > 0) {
+				foreach ( $query->result () as $row ) {
+					$lottery[] = array(
+							'_id'=>$row->mongo_id ,
+							'member_id'=>$row->member_id ,
+					);
+					unset($row);
 				}
 			}
+			unset($query);
 			$this->data_result ['lottery'] = $lottery;
 			// DEBUG印出
 			if ($data_input ['debug'] == 'debug') {
 				$this->data_result ['debug'] ['ENVIRONMENT'] = ENVIRONMENT;
 				$this->data_result ['debug'] ['data_input'] = $data_input;
-				$this->data_result ['debug'] ['data_cache'] = $data_cache;
 				$this->data_result ['debug'] ['cache_time'] = date ( 'Y-m-d h:i:s' );
 			}
+			unset($lottery);
+			unset($data_input);
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			$this->data_result ['time'] = $this->benchmark->elapsed_time ( 'code_start', 'code_end' );

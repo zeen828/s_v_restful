@@ -13,7 +13,7 @@ class Events extends CI_Controller {
 	function __construct() {
 		parent::__construct ();
 		// 效能檢查
-		$this->output->enable_profiler ( TRUE );
+		// $this->output->enable_profiler ( TRUE );
 	}
 	public function index() {
 		show_404();
