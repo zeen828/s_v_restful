@@ -44,13 +44,31 @@ function getLottery(){
 				console.log(statusText);
 				console.log('xhr');
 				console.log(xhr);
+				g_Lottery = json.lottery;
+				g_LotteryList = json.lottery_list;
 			}
 		}
 	});
 }
+
+function getRandomArrayElements(arr, count) {
+    var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+    while (i-- &gt; min) {
+        index = Math.floor((i + 1) * Math.random());
+        temp = shuffled[index];
+        shuffled[index] = shuffled[i];
+        shuffled[i] = temp;
+    }
+    return shuffled.slice(min);
+}
+
 function beginRndNum(trigger){
 	console.log('beginRndNum-開始&停止');
 	if(running){
+
+		var items = ['1','2','4','5','6','7','8','9','10'];
+		console.log( getRandomArrayElements(g_LotteryList, 4) );
+		
 		running = false;
 		clearTimeout(g_Timer);		
 		$(trigger).val("開始");
