@@ -10,7 +10,7 @@ var g_PersonCount = 20000;//参加抽奖人数
 var g_Timer;
 var running = false;
 function beginRndNum(trigger){
-	console.log('beginRndNum');
+	console.log('beginRndNum-開始&停止');
 	if(running){
 		running = false;
 		clearTimeout(g_Timer);		
@@ -26,18 +26,18 @@ function beginRndNum(trigger){
 }
 
 function updateRndNum(){
-	console.log('updateRndNum-更新值');
+	console.log('updateRndNum-更新');
 	var num = Math.floor(Math.random()*g_PersonCount+1);
 	$('#ResultNum').html(num);
 }
 
 function beginTimer(){
-	console.log('beginTimer-停止');
+	console.log('beginTimer-開始計時器');
 	g_Timer = setTimeout(beat, g_Interval);
 }
 
 function beat() {
-	console.log('beat');
+	console.log('beat-');
 	g_Timer = setTimeout(beat, g_Interval);
 	updateRndNum();
 }
