@@ -56,6 +56,10 @@ function beginRndNum(trigger){
 	if(running){
 		//開獎
 		console.log('開獎');
+		if(g_Lottery.length >= 1){
+			var user = getRandomArrayElements(g_Lottery, 1);
+			$('#ResultNum').html(user[0].member_id);
+		}
 		running = false;
 		clearTimeout(g_Timer);
 		$(trigger).val("開始");
