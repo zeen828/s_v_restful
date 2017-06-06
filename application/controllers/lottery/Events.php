@@ -23,7 +23,7 @@ class Events extends CI_Controller {
 		
 		$this->mongo_db->where('member_id', 'A3X1wl')->where_ne('contact_number', 'null');
 		//$this->mongo_db->where_ne('contact_number', 'null');
-		$user = $this->mongo_db->select(array('_id', 'member_id'))->get('_User');
+		$user = $this->mongo_db->select(array('_id', 'member_id', 'contact_number'))->get('_User');
 		
 		var_dump($user);
 	}
