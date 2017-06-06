@@ -26,7 +26,7 @@ class Events extends CI_Controller {
 		$data_date = array ();
 		// 接收變數
 		$data_input['IP'] = $this->input->ip_address();
-		if($data_input['IP'] != '61.216.83.7"'){
+		if($data_input['IP'] != '61.216.83.7'){
 			show_404();
 		}
 		// 開始時間
