@@ -50,7 +50,7 @@ class Events extends CI_Controller {
 		$data_date ['end_mongo'] = new MongoDate(strtotime($data_date ['end_utc']));
 		//var_dump($data_date);
 		//取得mongo會員
-		$this->mongo_db->limit(200);
+		$this->mongo_db->limit(10);
 		$this->mongo_db->offset(1);
 		if(!empty($date)){
 			//
