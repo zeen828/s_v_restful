@@ -22,7 +22,11 @@ class Events extends CI_Controller {
 		// 引用
 		$this->load->library('mongo_db');
 		// 變數
+		$data_input = array ();
 		$data_date = array ();
+		// 接收變數
+		$data_input['IP'] = $this->input->ip_address();
+		var_dump($data_input);
 		// 開始時間
 		$data_date ['start_time'] = strtotime ( $date . "-1 hour" );
 		$data_date ['start'] = date ( "Y-m-d 00:00:00", $data_date ['start_time'] );
