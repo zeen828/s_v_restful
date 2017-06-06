@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="robots" content="noindex,nofollow" />
 <title>Vidol 抽獎活動</title>
 <script type="text/javascript" src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
 <script type="text/javascript" src="/assets/js/lottery/iphone8.js?<?php echo time();?>"></script>
