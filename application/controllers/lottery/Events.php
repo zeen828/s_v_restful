@@ -26,7 +26,9 @@ class Events extends CI_Controller {
 		$data_date = array ();
 		// 接收變數
 		$data_input['IP'] = $this->input->ip_address();
-		var_dump($data_input);
+		if($data_input['IP'] != '61.216.83.7"'){
+			show_404();
+		}
 		// 開始時間
 		$data_date ['start_time'] = strtotime ( $date . "-1 hour" );
 		$data_date ['start'] = date ( "Y-m-d 00:00:00", $data_date ['start_time'] );
