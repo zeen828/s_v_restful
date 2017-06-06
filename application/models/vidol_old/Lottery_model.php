@@ -28,9 +28,10 @@ class Lottery_model extends CI_Model {
 		// echo $this->w_db->last_query();
 		return $result;
 	}
-	public function insert_lottery_list($mongo_id, $member_id) {
+	public function insert_lottery_list($mongo_id, $member_id, $user_ip) {
 		$this->w_db->set ( 'mongo_id', $mongo_id );
 		$this->w_db->set ( 'member_id', $member_id );
+		$this->w_db->set ( 'user_ip', $user_ip );
 		$this->w_db->insert ( 'lottery_iphone_list_tbl' );
 		$id = $this->w_db->insert_id ();
 		// echo $this->w_db->last_query();
