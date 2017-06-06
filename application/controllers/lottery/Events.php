@@ -18,6 +18,15 @@ class Events extends CI_Controller {
 	public function index() {
 		show_404();
 	}
+	public function mongo() {
+		$this->load->library('mongo_db');
+		
+		$this->mongo_db->where('member_id', 'A3X1wl');
+		$this->mongo_db->where_ne('contact_number', null);
+		$user = $this->mongo_db->select(array('_id', 'member_id'))->get('_User');
+		
+		var_dump($user);
+	}
 	public function iphone8($date = '') {
 		// 引用
 		$this->load->library('mongo_db');
