@@ -21,9 +21,7 @@ class Events extends CI_Controller {
 	public function mongo() {
 		$this->load->library('mongo_db');
 		
-		$this->mongo_db->where('member_id', 'A3X1wl');
-		$this->mongo_db->where_ne('contact_number', null);
-		$user = $this->mongo_db->select(array('_id', 'member_id'))->get('_User');
+		$user = $this->mongo_db->select(array('_id', 'member_id'))->where('member_id', 'A3X1wl')->where_ne('contact_number', null)->get('_User');
 		
 		var_dump($user);
 	}
