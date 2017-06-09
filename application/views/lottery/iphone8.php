@@ -71,7 +71,7 @@ body {
 	height: 10%;
 	font-size: 40pt;
 	font-family: Verdana;
-	border-radius: 5px;
+	border-radius: 10px;
 }
 </style>
 </head>
