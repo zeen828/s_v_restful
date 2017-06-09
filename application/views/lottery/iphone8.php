@@ -22,8 +22,13 @@ html {
 body {
 	position: static;
 	background-image: url(/assets/img/lottery/OB_iphone8/background.jpg);
-	background-repeat: no-repeat;
+	background-repeat : no-repeat; background-attachment : fixed;
+	background-position : center; background-size : cover;
 	text-align: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
 }
 
 #Result {
