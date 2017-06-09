@@ -13,7 +13,7 @@ end_date = '<?php echo $end;?>';
 </script>
 <style type="text/css">
 body {
-	background-image:url(assets/lottery/OB_iphone8/background.jpg); 
+	background-image:url(/assets/lottery/OB_iphone8/background.jpg); 
 	background-repeat: no-repeat; 
 	background-color: #fff;
 	text-align: center;
