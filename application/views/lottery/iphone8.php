@@ -11,10 +11,10 @@ g_LotteryList = <?php echo json_encode($lottery);?>;//預設抽獎名單避免AJ
 start_date = '<?php echo $start;?>';
 end_date = '<?php echo $end;?>';
 </script>
-</head>
-<body>
-	<style type="text/css">
+<style type="text/css">
 body {
+background-image:url(assets/lottery/OB_iphone8/background.jpg); 
+background-repeat: no-repeat; 
 	background-color: #fff;
 	text-align: center;
 	padding-top: 50px;
@@ -56,6 +56,8 @@ body {
 	color: #FFF;
 }
 </style>
+</head>
+<body>
 	<h1 style="color: #40AA53">抽獎結果</h1>
 	<div id="Result" style="color: #40AA53">
 		<span id="ResultNum">Vidol</span>
