@@ -23,9 +23,9 @@ body {
 
 #Result {
 	position: relative;
-	top: 50%;
-	left: 20%;
-	width: 20%;
+	top: 460px;
+	left: 60%;
+	width: 400px;
 }
 
 #ResultNum {
