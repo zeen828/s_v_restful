@@ -66,9 +66,11 @@ body {
 }
 
 #btn {
-	background-image: url(/assets/img/lottery/OB_iphone8/start_but.png);
+	//background-image: url(/assets/img/lottery/OB_iphone8/start_but.png);
 	width: 450px;
 	height: 110px;
+	font-size: 40pt;
+	font-family: Verdana
 }
 </style>
 </head>
