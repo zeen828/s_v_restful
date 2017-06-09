@@ -60,7 +60,6 @@ class Events extends CI_Controller {
 		$data_date ['end'] = date ( "Y-m-d 00:00:00", $data_date ['end_time'] );
 		$data_date ['end_utc'] = date ( "Y-m-d H:i:s", strtotime ( $data_date ['end'] . "-8 hour" ) );
 		$data_date ['end_mongo'] = new MongoDate ( strtotime ( $data_date ['end_utc'] ) );
-		// var_dump($data_date);
 		// cache name key
 		$cache_name = sprintf ( '%s_get_mongo_user_%s', ENVIRONMENT, $data_input ['date'] );
 		// $this->cache->memcached->delete ( $cache_name );
@@ -86,10 +85,10 @@ class Events extends CI_Controller {
 		$this->data_view ['lottery'] = $data_cache [$cache_name];
 		// DEBUG印出
 		if ($data_input ['debug'] == 'debug') {
-			var_dump($cache_name);
 			var_dump($data_input);
 			var_dump($data_cache);
-			var_dump($cache_name_version);
+			var_dump($data_date);
+			var_dump($cache_name);
 		}
 		// 輸出view
 		$this->load->view ( 'lottery/iphone8', $this->data_view );

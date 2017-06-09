@@ -4,8 +4,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="robots" content="noindex,nofollow" />
 <title>Vidol 抽獎活動</title>
-<script type="text/javascript" src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
-<script type="text/javascript" src="/assets/js/lottery/iphone8.js?<?php echo time();?>"></script>
+<script type="text/javascript"
+	src="/assets/plugins/jQuery/2.2.3/jquery-2.2.3.min.js"></script>
+<script type="text/javascript"
+	src="/assets/js/lottery/iphone8.js?<?php echo time();?>"></script>
 <script type="text/javascript">
 g_LotteryList = <?php echo json_encode($lottery);?>;//預設抽獎名單避免AJAX錯誤沒名單
 start_date = '<?php echo $start;?>';
@@ -13,18 +15,16 @@ end_date = '<?php echo $end;?>';
 </script>
 <style type="text/css">
 body {
-	background-image:url(/assets/img/lottery/OB_iphone8/background.jpg); 
-	background-repeat: no-repeat; 
+	position: static;
+	background-image: url(/assets/img/lottery/OB_iphone8/background.jpg);
+	background-repeat: no-repeat;
 	text-align: center;
 }
 
 #Result {
-	border: 3px solid #40AA53;
-	margin: 0 auto;
-	text-align: center;
-	width: 400px;
-	padding: 50px 0;
-	background: #efe;
+	position: relative;
+	top: 100px;
+	left: 200px;
 }
 
 #ResultNum {
