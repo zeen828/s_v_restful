@@ -49,8 +49,8 @@ body {
 
 #Result {
 	position: relative;
-	top: 50%;
-	left: 60%;
+	top: 45%;
+	left: 58%;
 	width: 400px;
 }
 
@@ -88,7 +88,7 @@ body {
 			<span id="ResultNum">Vidol</span>
 		</div>
 		<div id="Button">
-			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' />
+			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' style="background-image:url(/assets/img/lottery/OB_iphone8/start_but.png);width:80px;height:25px;" />
 		</div>
 	</div>
 </body>
