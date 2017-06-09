@@ -23,12 +23,13 @@ body {
 
 #Result {
 	position: relative;
-	top: 100px;
-	left: 200px;
+	top: 50%;
+	left: 20%;
+	width: 20%;
 }
 
 #ResultNum {
-	font-size: 50pt;
+	font-size: 60pt;
 	font-family: Verdana
 }
 
