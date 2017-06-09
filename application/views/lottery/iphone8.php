@@ -20,8 +20,8 @@ html {
 }
 
 #main {
-	width: 100%;
-	height: 100%;
+	width: 600px;
+	height: 480px;
 	text-align: center;
 	position: static;
 	background-image: url(/assets/img/lottery/OB_iphone8/background.jpg);
