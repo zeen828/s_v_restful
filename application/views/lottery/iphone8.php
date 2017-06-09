@@ -88,7 +88,7 @@ body {
 			<span id="ResultNum">Vidol</span>
 		</div>
 		<div id="Button">
-			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' style="background-image:url(/assets/img/lottery/OB_iphone8/start_but.png);width:80px;height:25px;" />
+			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' style="background-image:url(/assets/img/lottery/OB_iphone8/start_but.png);width:454px;height:115px;" />
 		</div>
 	</div>
 </body>
