@@ -19,20 +19,32 @@ html {
 	height: 100%;
 }
 
-#main {
-	width: 600px;
-	height: 480px;
+body {
 	text-align: center;
 	position: static;
 	background-image: url(/assets/img/lottery/OB_iphone8/background.jpg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-	background-position: center;
+	background-position: left bottom;
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
 	background-size: cover;
+}
+
+#main {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: -999;
+}
+
+#main img {
+	min-height: 100%;
+	width: 100%;
 }
 
 #Result {
