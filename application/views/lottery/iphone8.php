@@ -51,7 +51,7 @@ body {
 	position: relative;
 	top: 45%;
 	left: 58%;
-	width: 400px;
+	width: 20%;
 }
 
 #ResultNum {
@@ -63,15 +63,15 @@ body {
 	position: relative;
 	top: 55%;
 	left: 59%;
-	width: 400px;
+	width: 20%;
 }
 
 #btn {
-	width: 400px;
-	height: 100px;
+	width: 20%;
+	height: 10%;
 	font-size: 40pt;
 	font-family: Verdana;
-	border-radius: 20px;
+	border-radius: 5px;
 }
 </style>
 </head>
