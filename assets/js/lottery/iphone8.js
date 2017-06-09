@@ -83,13 +83,13 @@ function beginRndNum(trigger){
 		clearTimeout(g_Timer);
 		writeLotteryList();//
 		g_LotteryArray.push($('#ResultNum').html());
-		$(trigger).val("開始");
+		$(trigger).val("開始抽獎");
 		$('#ResultNum').css('color','red');
 	}else{
 		getLottery();
 		running = true;
 		$('#ResultNum').css('color','black');
-		$(trigger).val("停止");
+		$(trigger).val("幸運得主");
 		beginTimer();
 	}
 }

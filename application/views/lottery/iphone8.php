@@ -81,8 +81,7 @@ body {
 			<span id="ResultNum">Vidol</span>
 		</div>
 		<div id="Button">
-			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)'
-				style="" />
+			<input type='button' id="btn" value='開始抽獎' onclick='beginRndNum(this)' />
 		</div>
 	</div>
 </body>
