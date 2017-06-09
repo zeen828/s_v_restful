@@ -34,7 +34,6 @@ class Events extends CI_Controller {
 	}
 	public function iphone8($date = '') {
 		// 引用
-		$this->load->library ( 'mongo_db' );
 		$this->load->driver ( 'cache', array (
 				'adapter' => 'memcached',
 				'backup' => 'dummy' 
@@ -67,6 +66,7 @@ class Events extends CI_Controller {
 		// $this->cache->memcached->delete ( $cache_name );
 		$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
 		if ($data_cache [$cache_name] == false) {
+			$this->load->library ( 'mongo_db' );
 			// 取得mongo會員
 			$this->mongo_db->limit ( 10 );
 			$this->mongo_db->offset ( 1 );
@@ -86,6 +86,7 @@ class Events extends CI_Controller {
 		$this->data_view ['lottery'] = $data_cache [$cache_name];
 		// DEBUG印出
 		if ($data_input ['debug'] == 'debug') {
+			var_dump($cache_name);
 			var_dump($data_input);
 			var_dump($data_cache);
 			var_dump($cache_name_version);
