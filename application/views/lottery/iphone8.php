@@ -59,24 +59,10 @@ body {
 	font-family: Verdana
 }
 
-#Button {
-	margin: 50px 0 0 0;
-}
-
-#Button input {
-	font-size: 40px;
-	padding: 0 50px;
-}
-
 #btn {
 	background-image:url(/assets/img/lottery/OB_iphone8/start_but.png);
 	width:450px;
 	height:110px;
-	margin: 0em auto;
-	font-size: 1em;
-	border-radius: 2.5px;
-	-moz-border-radius: 2.5px;
-	-webkit-border-radius: 2.5px;
 }
 </style>
 </head>
