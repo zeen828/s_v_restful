@@ -14,7 +14,7 @@ class Events extends CI_Controller {
 	function __construct() {
 		parent::__construct ();
 		// 效能檢查
-		$this->output->enable_profiler ( TRUE );
+		// $this->output->enable_profiler ( TRUE );
 	}
 	public function index() {
 		show_404 ();
@@ -85,7 +85,7 @@ class Events extends CI_Controller {
 		$this->data_view ['end'] = $data_date ['end'];
 		$this->data_view ['lottery'] = $data_cache [$cache_name];
 		// DEBUG印出
-		if ($data_input ['debug'] == 'debug') {
+		if ($data_input ['debug'] == 'debug' || true) {
 			$this->data_result ['debug'] ['data_input'] = $data_input;
 			$this->data_result ['debug'] ['data_cache'] = $data_cache;
 			$this->data_result ['debug'] ['cache_name_version'] = $cache_name_version;
