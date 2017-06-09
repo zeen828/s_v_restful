@@ -61,8 +61,8 @@ body {
 
 #Button {
 	position: relative;
-	top: 50%;
-	left: 40%;
+	top: 55%;
+	left: 20%;
 }
 
 #btn {
