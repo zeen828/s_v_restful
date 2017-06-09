@@ -69,7 +69,8 @@ body {
 	width: 450px;
 	height: 110px;
 	font-size: 40pt;
-	font-family: Verdana;;
+	font-family: Verdana;
+	border-radius: 20px;
 }
 </style>
 </head>
