@@ -69,7 +69,7 @@ body {
 #btn {
 	width: 70%;
 	height: 10%;
-	font-size: 40pt;
+	font-size: 30pt;
 	font-family: Verdana;
 	border-radius: 10px;
 }
