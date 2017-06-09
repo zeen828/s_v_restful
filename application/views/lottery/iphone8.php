@@ -19,12 +19,16 @@ html {
 	height: 100%;
 }
 
-body {
+#main {
+	width: 100%;
+	height: 100%;
+	text-align: center;
 	position: static;
 	background-image: url(/assets/img/lottery/OB_iphone8/background.jpg);
-	background-repeat : no-repeat; background-attachment : fixed;
-	background-position : center; background-size : cover;
-	text-align: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -67,11 +71,13 @@ body {
 </style>
 </head>
 <body>
-	<div id="Result">
-		<span id="ResultNum">Vidol</span>
-	</div>
-	<div id="Button">
-		<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' />
+	<div id="main">
+		<div id="Result">
+			<span id="ResultNum">Vidol</span>
+		</div>
+		<div id="Button">
+			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' />
+		</div>
 	</div>
 </body>
 </html>
