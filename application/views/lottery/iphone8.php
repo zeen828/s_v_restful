@@ -14,6 +14,11 @@ start_date = '<?php echo $start;?>';
 end_date = '<?php echo $end;?>';
 </script>
 <style type="text/css">
+html {
+	width: 100%;
+	height: 100%;
+}
+
 body {
 	position: static;
 	background-image: url(/assets/img/lottery/OB_iphone8/background.jpg);
@@ -23,7 +28,7 @@ body {
 
 #Result {
 	position: relative;
-	top: 460px;
+	top: 50%;
 	left: 60%;
 	width: 400px;
 }
