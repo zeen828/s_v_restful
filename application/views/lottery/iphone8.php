@@ -69,16 +69,14 @@ body {
 }
 
 #btn {
-	background-color: #40AA53;
-	border: 1px solid #40AA53;
-	width: 20%;
-	height: 45px;
+	background-image:url(/assets/img/lottery/OB_iphone8/start_but.png);
+	width:450px;
+	height:110px;
 	margin: 0em auto;
 	font-size: 1em;
 	border-radius: 2.5px;
 	-moz-border-radius: 2.5px;
 	-webkit-border-radius: 2.5px;
-	color: #FFF;
 }
 </style>
 </head>
@@ -88,7 +86,7 @@ body {
 			<span id="ResultNum">Vidol</span>
 		</div>
 		<div id="Button">
-			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' style="background-image:url(/assets/img/lottery/OB_iphone8/start_but.png);width:454px;height:115px;" />
+			<input type='button' id="btn" value='開始' onclick='beginRndNum(this)' style="" />
 		</div>
 	</div>
 </body>
