@@ -45,6 +45,7 @@ class Events extends CI_Controller {
 		$data_date = array ();
 		// 接收變數
 		$data_input ['date'] = $date;
+		$data_input ['debug'] = $this->input->get('debug');
 		$data_input ['IP'] = $this->input->ip_address ();
 		if ($data_input ['IP'] != '61.216.83.7') {
 			show_404 ();
@@ -83,6 +84,12 @@ class Events extends CI_Controller {
 		$this->data_view ['start'] = $data_date ['start'];
 		$this->data_view ['end'] = $data_date ['end'];
 		$this->data_view ['lottery'] = $data_cache [$cache_name];
+		// DEBUG印出
+		if ($data_input ['debug'] == 'debug') {
+			$this->data_result ['debug'] ['data_input'] = $data_input;
+			$this->data_result ['debug'] ['data_cache'] = $data_cache;
+			$this->data_result ['debug'] ['cache_name_version'] = $cache_name_version;
+		}
 		// 輸出view
 		$this->load->view ( 'lottery/iphone8', $this->data_view );
 	}
