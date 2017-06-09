@@ -62,7 +62,7 @@ class Events extends CI_Controller {
 		$data_date ['end_mongo'] = new MongoDate ( strtotime ( $data_date ['end_utc'] ) );
 		// var_dump($data_date);
 		// cache name key
-		$cache_name = sprintf ( '%s_get_mongo_user_%s_%s', ENVIRONMENT, $data_date ['start_utc'], $data_date ['end_utc'] );
+		$cache_name = sprintf ( '%s_get_mongo_user_%s', ENVIRONMENT, $data_input ['date'] );
 		// $this->cache->memcached->delete ( $cache_name );
 		$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
 		if ($data_cache [$cache_name] == false) {
