@@ -63,11 +63,12 @@ body {
 	position: relative;
 	top: 55%;
 	left: 20%;
+	width: 400px;
 }
 
 #btn {
-	width: 450px;
-	height: 110px;
+	width: 400px;
+	height: 100px;
 	font-size: 40pt;
 	font-family: Verdana;
 	border-radius: 20px;
