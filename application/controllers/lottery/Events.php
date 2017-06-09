@@ -67,7 +67,7 @@ class Events extends CI_Controller {
 		if ($data_cache [$cache_name] == false) {
 			$this->load->library ( 'mongo_db' );
 			// 取得mongo會員
-			$this->mongo_db->limit ( 10 );
+			$this->mongo_db->limit ( 1000 );
 			$this->mongo_db->offset ( 1 );
 			if (! empty ( $date )) {
 				//
