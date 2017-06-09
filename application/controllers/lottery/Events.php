@@ -85,10 +85,10 @@ class Events extends CI_Controller {
 		$this->data_view ['end'] = $data_date ['end'];
 		$this->data_view ['lottery'] = $data_cache [$cache_name];
 		// DEBUG印出
-		if ($data_input ['debug'] == 'debug' || true) {
-			$this->data_result ['debug'] ['data_input'] = $data_input;
-			$this->data_result ['debug'] ['data_cache'] = $data_cache;
-			$this->data_result ['debug'] ['cache_name_version'] = $cache_name_version;
+		if ($data_input ['debug'] == 'debug') {
+			var_dump($data_input);
+			var_dump($data_cache);
+			var_dump($cache_name_version);
 		}
 		// 輸出view
 		$this->load->view ( 'lottery/iphone8', $this->data_view );
