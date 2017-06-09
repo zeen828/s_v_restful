@@ -56,7 +56,7 @@ body {
 
 #ResultNum {
 	font-size: 60pt;
-	font-family: Verdana
+	font-family: Verdana;
 }
 
 #Button {
@@ -66,11 +66,10 @@ body {
 }
 
 #btn {
-	//background-image: url(/assets/img/lottery/OB_iphone8/start_but.png);
 	width: 450px;
 	height: 110px;
 	font-size: 40pt;
-	font-family: Verdana
+	font-family: Verdana;;
 }
 </style>
 </head>
