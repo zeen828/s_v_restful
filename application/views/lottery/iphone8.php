@@ -15,9 +15,7 @@ end_date = '<?php echo $end;?>';
 body {
 	background-image:url(/assets/img/lottery/OB_iphone8/background.jpg); 
 	background-repeat: no-repeat; 
-	background-color: #fff;
 	text-align: center;
-	padding-top: 50px;
 }
 
 #Result {
@@ -58,8 +56,7 @@ body {
 </style>
 </head>
 <body>
-	<h1 style="color: #40AA53">抽獎結果</h1>
-	<div id="Result" style="color: #40AA53">
+	<div id="Result">
 		<span id="ResultNum">Vidol</span>
 	</div>
 	<div id="Button">
