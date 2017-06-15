@@ -62,7 +62,7 @@ body {
 #Button {
 	position: relative;
 	top: 55%;
-	left: 59%;
+	left: 58%;
 	width: 20%;
 }
 
