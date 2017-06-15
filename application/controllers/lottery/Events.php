@@ -124,10 +124,12 @@ class Events extends CI_Controller {
 		$data_date ['end_mongo'] = new MongoDate ( strtotime ( $data_date ['end_utc'] ) );
 		// cache name key
 		$cache_name = sprintf ( '%s_get_mongo_user_%s', ENVIRONMENT, $data_input ['date'] );
-$this->cache->memcached->delete ( $cache_name );
+		// $this->cache->memcached->delete ( $cache_name );
 		$data_cache [$cache_name] = $this->cache->memcached->get ( $cache_name );
 		if ($data_cache [$cache_name] == false) {
+			$data_cache [$cache_name] = array();
 			$this->r_pdb = $this->load->database('postgre_production_read', TRUE);
+			$this->r_pdb->select('member_id');
 			if (! empty ( $date )) {
 				//
 				$this->r_pdb->where('created_at <=', $data_date ['start_utc']);
@@ -135,11 +137,15 @@ $this->cache->memcached->delete ( $cache_name );
 			}
 			$query = $this->r_pdb->get('ob_iphones');
 			echo $this->r_pdb->last_query();
-// 			if ($query->num_rows () > 0) {
-// 				foreach ( $query->result () as $row ) {
+			if ($query->num_rows () > 0) {
+				foreach ( $query->result () as $row ) {
 // 					print_r($row);
-// 				}
-// 			}
+					$data_cache [$cache_name][] = array(
+							'_id' => $row->member_id,
+							'member_id' => $row->member_id
+					);
+				}
+			}
 			$this->cache->memcached->save ( $cache_name, $data_cache [$cache_name], 3000 );
 		}
 		// var_dump($user);
