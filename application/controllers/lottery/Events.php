@@ -32,7 +32,7 @@ class Events extends CI_Controller {
 		
 		var_dump ( $user );
 	}
-	public function iphone8($date = '') {
+	public function iphone8_mongo($date = '') {
 		// 引用
 		$this->load->driver ( 'cache', array (
 				'adapter' => 'memcached',
@@ -94,7 +94,7 @@ class Events extends CI_Controller {
 		$this->load->view ( 'lottery/iphone8', $this->data_view );
 	}
 	
-	public function iphone8_postgre($date = '') {
+	public function iphone8($date = '') {
 		// 引用
 		$this->load->driver ( 'cache', array (
 				'adapter' => 'memcached',
@@ -133,15 +133,14 @@ class Events extends CI_Controller {
 			if (! empty ( $date )) {
 				//
 				$this->r_pdb->where('created_at <=', $data_date ['start_utc']);
-				//ob_iphones
 			}
 			$query = $this->r_pdb->get('ob_iphones');
 			echo $this->r_pdb->last_query();
 			if ($query->num_rows () > 0) {
 				foreach ( $query->result () as $row ) {
-// 					print_r($row);
+					// print_r($row);
 					$data_cache [$cache_name][] = array(
-							'_id' => $row->member_id,
+							// '_id' => $row->member_id,
 							'member_id' => $row->member_id
 					);
 				}
