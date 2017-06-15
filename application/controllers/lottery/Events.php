@@ -94,7 +94,7 @@ class Events extends CI_Controller {
 		$this->load->view ( 'lottery/iphone8', $this->data_view );
 	}
 	
-	public function iphone8($date = '') {
+	public function iphone8($start_date = '', $end_date = '') {
 		// 引用
 		$this->load->driver ( 'cache', array (
 				'adapter' => 'memcached',
@@ -113,15 +113,13 @@ class Events extends CI_Controller {
 			exit ();
 		}
 		// 開始時間
-		$data_date ['start_time'] = strtotime ( $date . "-1 hour" );
+		$data_date ['start_time'] = strtotime ( $start_date . "-1 hour" );
 		$data_date ['start'] = date ( "Y-m-d 00:00:00", $data_date ['start_time'] );
 		$data_date ['start_utc'] = date ( "Y-m-d H:i:s", strtotime ( $data_date ['start'] . "-8 hour" ) );
-		$data_date ['start_mongo'] = new MongoDate ( strtotime ( $data_date ['start_utc'] ) );
-		// 七天後
-		$data_date ['end_time'] = strtotime ( $data_date ['start'] . "+7 day" );
+		// 限制時間
+		$data_date ['end_time'] = strtotime ( $end_date . "-1 hour" );
 		$data_date ['end'] = date ( "Y-m-d 00:00:00", $data_date ['end_time'] );
 		$data_date ['end_utc'] = date ( "Y-m-d H:i:s", strtotime ( $data_date ['end'] . "-8 hour" ) );
-		$data_date ['end_mongo'] = new MongoDate ( strtotime ( $data_date ['end_utc'] ) );
 		// cache name key
 		$cache_name = sprintf ( '%s_get_mongo_user_%s', ENVIRONMENT, $data_input ['date'] );
 		// $this->cache->memcached->delete ( $cache_name );
@@ -130,12 +128,14 @@ class Events extends CI_Controller {
 			$data_cache [$cache_name] = array();
 			$this->r_pdb = $this->load->database('postgre_production_read', TRUE);
 			$this->r_pdb->select('member_id');
-			if (! empty ( $date )) {
-				//
+			if (! empty ( $start_date )) {
 				$this->r_pdb->where('created_at <=', $data_date ['start_utc']);
 			}
+			if (! empty ( $end_date )) {
+				$this->r_pdb->where('created_at >', $data_date ['end_utc']);
+			}
 			$query = $this->r_pdb->get('ob_iphones');
-			echo $this->r_pdb->last_query();
+			//echo $this->r_pdb->last_query();
 			if ($query->num_rows () > 0) {
 				foreach ( $query->result () as $row ) {
 					// print_r($row);
