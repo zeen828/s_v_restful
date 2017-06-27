@@ -16,6 +16,7 @@ class Lottery_model extends CI_Model {
 	}
 	public function get_lottery() {
 		$this->r_db->where ( 'status', '1' );
+		$this->r_db->order_by('title', 'RANDOM');
 		$query = $this->r_db->get ( 'lottery_iphone_tbl' );
 		// echo $this->r_db->last_query();
 		return $query;
