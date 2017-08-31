@@ -6,7 +6,7 @@ class SwaggerDoc extends CI_Controller {
 		parent::__construct ();
 	}
 	public function index() {
-		$api_host = $_SERVER['HTTP_HOST'];
+		$api_host = $_SERVER ['HTTP_HOST'];
 		$doc_array = array (
 				"swagger" => "2.0",
 				"info" => array (
@@ -35,8 +35,12 @@ class SwaggerDoc extends CI_Controller {
 						),
 						array (
 								"name" => "3.devices",
-								"description" => "設備"
-						)
+								"description" => "設備" 
+						),
+						array (
+								"name" => "9.other",
+								"description" => "其他" 
+						) 
 				),
 				"schemes" => array (
 						"http" 
@@ -161,8 +165,8 @@ class SwaggerDoc extends CI_Controller {
 														"name" => "debug",
 														"description" => "除錯",
 														"in" => "formData",
-														"type" => "string"
-												)
+														"type" => "string" 
+												) 
 										),
 										"responses" => array (
 												"201" => array (
@@ -249,8 +253,8 @@ class SwaggerDoc extends CI_Controller {
 														"name" => "debug",
 														"description" => "除錯",
 														"in" => "query",
-														"type" => "string"
-												)
+														"type" => "string" 
+												) 
 										),
 										"responses" => array (
 												"200" => array (
@@ -281,7 +285,7 @@ class SwaggerDoc extends CI_Controller {
 						"/boards/message_web" => array (
 								"get" => array (
 										"tags" => array (
-												"1.boards"
+												"1.boards" 
 										),
 										"summary" => "取得留言(瀑布流)",
 										"description" => "取得留言(瀑布流)",
@@ -290,7 +294,7 @@ class SwaggerDoc extends CI_Controller {
 														"name" => "programme",
 														"description" => "節目編號",
 														"in" => "query",
-														"type" => "string"
+														"type" => "string" 
 												),
 												array (
 														"name" => "video_type",
@@ -302,40 +306,40 @@ class SwaggerDoc extends CI_Controller {
 																"episode",
 																"channel",
 																"live",
-																"event"
-														)
+																"event" 
+														) 
 												),
 												array (
 														"name" => "video_id",
 														"description" => "影音編號",
 														"in" => "query",
 														"type" => "string",
-														"required" => TRUE
+														"required" => TRUE 
 												),
 												array (
 														"name" => "sort",
 														"description" => "排序[1:舊到新,0:新到舊(查詢資料)]",
 														"in" => "query",
-														"type" => "integer"
+														"type" => "integer" 
 												),
 												array (
 														"name" => "start_no",
 														"description" => "目前資料最少留言編號 (首次為0抓最新)",
 														"in" => "query",
-														"type" => "integer"
+														"type" => "integer" 
 												),
 												array (
 														"name" => "pagesize",
 														"description" => "每頁資料數",
 														"in" => "query",
-														"type" => "integer"
+														"type" => "integer" 
 												),
 												array (
 														"name" => "debug",
 														"description" => "除錯",
 														"in" => "query",
-														"type" => "string"
-												)
+														"type" => "string" 
+												) 
 										),
 										"responses" => array (
 												"200" => array (
@@ -347,21 +351,21 @@ class SwaggerDoc extends CI_Controller {
 																"properties" => array (
 																		"status" => array (
 																				"type" => "boolean",
-																				"description" => "狀態"
+																				"description" => "狀態" 
 																		),
 																		"info" => $this->__get_responses_data ( "page info" ),
-																		"data" => $this->__get_responses_data ( "boards data" )
-																)
-														)
+																		"data" => $this->__get_responses_data ( "boards data" ) 
+																) 
+														) 
 												),
 												"204" => array (
-														"description" => "沒有資料"
+														"description" => "沒有資料" 
 												),
 												"400" => array (
-														"description" => "資料錯誤"
-												)
-										)
-								)
+														"description" => "資料錯誤" 
+												) 
+										) 
+								) 
 						),
 						"/users/send_mail_verify" => array (
 								"post" => array (
@@ -376,14 +380,14 @@ class SwaggerDoc extends CI_Controller {
 														"description" => "Middle Layer token",
 														"in" => "header",
 														"type" => "string",
-														"required" => TRUE
+														"required" => TRUE 
 												),
 												array (
 														"name" => "email",
 														"description" => "信箱",
 														"in" => "formData",
-														"type" => "string"
-												),
+														"type" => "string" 
+												) 
 										),
 										"responses" => array (
 												"200" => array (
@@ -396,7 +400,7 @@ class SwaggerDoc extends CI_Controller {
 																		"status" => array (
 																				"type" => "boolean",
 																				"description" => "狀態" 
-																		)
+																		) 
 																) 
 														) 
 												),
@@ -404,7 +408,7 @@ class SwaggerDoc extends CI_Controller {
 														"description" => "資料錯誤" 
 												),
 												"401" => array (
-														"description" => "未授權"
+														"description" => "未授權" 
 												),
 												"416" => array (
 														"description" => "請求範圍不符合" 
@@ -415,7 +419,7 @@ class SwaggerDoc extends CI_Controller {
 						"/devices/tvbox" => array (
 								"post" => array (
 										"tags" => array (
-												"3.devices"
+												"3.devices" 
 										),
 										"summary" => "電視盒會員送",
 										"description" => "電視盒會員送",
@@ -425,46 +429,116 @@ class SwaggerDoc extends CI_Controller {
 														"description" => "Middle Layer token",
 														"in" => "header",
 														"type" => "string",
-														"required" => TRUE
+														"required" => TRUE 
 												),
 												array (
 														"name" => "user_no",
 														"description" => "會員(user_pk等會員整合後使用)",
 														"in" => "formData",
-														"type" => "string"
+														"type" => "string" 
 												),
 												array (
 														"name" => "mongo_id",
 														"description" => "會員mongo_id",
 														"in" => "formData",
-														"type" => "string"
+														"type" => "string" 
 												),
 												array (
 														"name" => "member_id",
 														"description" => "會員ID",
 														"in" => "formData",
-														"type" => "string"
+														"type" => "string" 
 												),
 												array (
 														"name" => "dealer",
 														"description" => "經銷商",
 														"in" => "formData",
-														"type" => "string"
+														"type" => "string" 
 												),
 												array (
 														"name" => "key_word",
 														"description" => "關鍵字",
 														"in" => "formData",
-														"type" => "string"
-												),
+														"type" => "string" 
+												) 
 										),
 										"responses" => array (
 												"200" => array (
-														"description" => "成功",
+														"description" => "成功" 
+												) 
+										) 
+								) 
+						),
+						"/other/check/sms" => array (
+								"get" => array (
+										"tags" => array (
+												"9.other" 
+										),
+										"summary" => "檢驗簡訊",
+										"description" => "檢驗簡訊",
+										"parameters" => array (
+												array (
+														"name" => "Authorization",
+														"description" => "Middle Layer token",
+														"in" => "header",
+														"type" => "string",
+														"required" => TRUE 
 												),
-										)
-								)
-						)
+												array (
+														"name" => "phone",
+														"description" => "行動電話號碼",
+														"in" => "formData",
+														"type" => "string" 
+												),
+												array (
+														"name" => "code",
+														"description" => "簡訊",
+														"in" => "formData",
+														"type" => "string" 
+												) 
+										),
+										"responses" => array (
+												"200" => array (
+														"description" => "成功" 
+												) 
+										) 
+								) 
+						),
+						"/other/send/sms" => array (
+								"post" => array (
+										"tags" => array (
+												"9.other" 
+										),
+										"summary" => "發送簡訊",
+										"description" => "發送簡訊",
+										"parameters" => array (
+												array (
+														"name" => "Authorization",
+														"description" => "Middle Layer token",
+														"in" => "header",
+														"type" => "string",
+														"required" => TRUE 
+												),
+												array (
+														"name" => "phone",
+														"description" => "電話號碼",
+														"in" => "formData",
+														"type" => "string" 
+												),
+												array (
+														"name" => "msm",
+														"description" => "簡訊內容",
+														"in" => "formData",
+														"type" => "string" 
+												) 
+										),
+										"responses" => array (
+												"200" => array (
+														"description" => "成功" 
+												) 
+										) 
+								) 
+						) 
 				) 
 		);
 		$this->output->set_content_type ( "application/json" );
