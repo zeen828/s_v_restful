@@ -1,26 +1,19 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 
 require_once APPPATH . '/libraries/REST_Controller.php';
-
-class Check extends REST_Controller
-{
-
+class Check extends REST_Controller {
 	private $data_result;
-
-	public function __construct ()
-	{
-		parent::__construct();
+	public function __construct() {
+		parent::__construct ();
 		// 引用
-		$this->load->helper('formats');
+		$this->load->helper ( 'formats' );
 		// 初始化
-		$this->data_result = format_helper_return_data();
+		$this->data_result = format_helper_return_data ();
 		// 效能檢查
 		// $this->output->enable_profiler(TRUE);
 	}
-
-	public function sms_get ()
-	{
+	public function sms_get() {
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
@@ -30,7 +23,7 @@ class Check extends REST_Controller
 			$data_input ['Authorization'] = $this->post ( 'Authorization' );
 			$data_input ['phone'] = $this->post ( 'phone' );
 			$data_input ['code'] = $this->post ( 'code' );
-
+			
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// 標記時間計算
