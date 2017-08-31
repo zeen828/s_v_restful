@@ -18,9 +18,10 @@ class Send extends REST_Controller {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
 			// 引入
+			$this->load->model ( 'vidol_user/phone_sms_check_model' );
+			$this->config->load ( 'smexpress_sms' );
 			$this->config->load ( 'restful_status_code' );
 			$this->lang->load ( 'restful_status_lang', 'traditional-chinese' );
-			$this->config->load ( 'smexpress_sms' );
 			// 變數
 			$data_input = array ();
 			// 接收變數
@@ -52,13 +53,21 @@ class Send extends REST_Controller {
 			);
 			$url_query = http_build_query ( $sms_array );
 			// 寫資料庫
+			$data = array (
+					'phone' => $data_input ['phone'],
+					'code' => $data_input ['msm'],
+					'expires_time_at' => strtotime ( "+10 minute" ),
+					'expires_at' => date ( "Y-m-d H:00:00", strtotime ( "+10 minute" ) ),
+					'status' => '1' 
+			);
+			$this->phone_sms_check_model->insert_data ( $data );
 			// 發送簡訊
 			$ch = curl_init ();
 			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'sms_send_api_url' ), $url_query ) );
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			$output = curl_exec ( $ch );
 			curl_close ( $ch );
-			if(!empty($output) && $output != false){
+			if (! empty ( $output ) && $output != false) {
 				$this->data_result ['status'] = true;
 			}
 			// 結束時間標記
