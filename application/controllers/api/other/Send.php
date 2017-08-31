@@ -38,7 +38,23 @@ class Send extends REST_Controller {
 				$this->response ( $this->data_result, 416 );
 				return;
 			}
-			
+			// 整理資料
+			if (empty ( $data_input ['msm'] )) {
+				$data_input ['msm'] = substr ( md5 ( rand () ), 0, 6 );
+			}
+			$sms_array = array (
+					'username' => $this->config->item ( 'sms_usermname' ),
+					'password' => $this->config->item ( 'sms_password' ),
+					'dstaddr' => $data_input ['phone'],
+					'DestName' => 'vidol',
+					'encoding' => 'UTF8',
+					'smbody' => sprintf ( '你的檢查碼是[%s]', $data_input ['msm'] ) 
+			);
+			$url_query = http_build_query ( $sms_array );
+			$this->data_result['sms_array'] = $sms_array;
+			$this->data_result['url_query'] = $url_query;
+			// 寫資料庫
+			// 發送簡訊
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// 標記時間計算
