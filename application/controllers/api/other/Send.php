@@ -56,8 +56,8 @@ class Send extends REST_Controller {
 			// 寫資料庫
 			// 發送簡訊
 			$ch = curl_init ();
-			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'send_api_url' ), $url_query ) );
-			$this->data_result ['curl_url'] = sprintf ( '%s?%s', $this->config->item ( 'send_api_url' ), $url_query );
+			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'sms_send_api_url' ), $url_query ) );
+			$this->data_result ['curl_url'] = sprintf ( '%s?%s', $this->config->item ( 'sms_send_api_url' ), $url_query );
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			$output = curl_exec ( $ch );
 			$this->data_result ['output'] = $output;
