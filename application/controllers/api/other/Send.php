@@ -51,10 +51,15 @@ class Send extends REST_Controller {
 					'smbody' => sprintf ( '你的檢查碼是[%s]', $data_input ['msm'] ) 
 			);
 			$url_query = http_build_query ( $sms_array );
-			$this->data_result['sms_array'] = $sms_array;
-			$this->data_result['url_query'] = $url_query;
+			$this->data_result ['sms_array'] = $sms_array;
+			$this->data_result ['url_query'] = $url_query;
 			// 寫資料庫
 			// 發送簡訊
+			$ch = curl_init ();
+			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'send_api_url' ), $url_query ) );
+			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+			$output = curl_exec ( $ch );
+			curl_close ( $ch );
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// 標記時間計算
