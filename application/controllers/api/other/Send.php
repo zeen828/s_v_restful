@@ -47,7 +47,7 @@ class Send extends REST_Controller {
 			$send = $this->send_sms_model->insert_data ( array (
 					'ss_dealer' => 'smexpress',
 					'ss_phone' => $data_input ['phone'],
-					'ss_msm' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊', $data_input ['msm'] ) 
+					'ss_msm' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊,註冊成功半小時內會開通認證', $data_input ['msm'] ) 
 			) );
 			// 註冊檢查資料
 			$check = $this->phone_sms_check_model->insert_data ( array (
