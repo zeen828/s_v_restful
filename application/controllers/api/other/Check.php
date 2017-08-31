@@ -17,6 +17,10 @@ class Check extends REST_Controller {
 		try {
 			// 開始時間標記
 			$this->benchmark->mark ( 'code_start' );
+			// 引入
+			$this->load->model ( 'vidol_user/phone_sms_check_model' );
+			$this->config->load ( 'restful_status_code' );
+			$this->lang->load ( 'restful_status_lang', 'traditional-chinese' );
 			// 變數
 			$data_input = array ();
 			// 接收變數

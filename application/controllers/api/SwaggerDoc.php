@@ -487,14 +487,16 @@ class SwaggerDoc extends CI_Controller {
 												array (
 														"name" => "phone",
 														"description" => "行動電話號碼",
-														"in" => "formData",
-														"type" => "string" 
+														"in" => "query",
+														"type" => "string",
+														"required" => TRUE
 												),
 												array (
 														"name" => "code",
-														"description" => "簡訊",
-														"in" => "formData",
-														"type" => "string" 
+														"description" => "認證碼",
+														"in" => "query",
+														"type" => "string",
+														"required" => TRUE
 												) 
 										),
 										"responses" => array (
@@ -523,7 +525,8 @@ class SwaggerDoc extends CI_Controller {
 														"name" => "phone",
 														"description" => "電話號碼",
 														"in" => "formData",
-														"type" => "string" 
+														"type" => "string",
+														"required" => TRUE
 												),
 												array (
 														"name" => "msm",
