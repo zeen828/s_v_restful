@@ -24,10 +24,18 @@ class Check extends REST_Controller {
 			// 變數
 			$data_input = array ();
 			// 接收變數
-			$data_input ['Authorization'] = $this->post ( 'Authorization' );
-			$data_input ['phone'] = $this->post ( 'phone' );
-			$data_input ['code'] = $this->post ( 'code' );
-			
+			$data_input ['phone'] = $this->get ( 'phone' );
+			$data_input ['code'] = $this->get ( 'code' );
+			// 查詢
+			$check = $this->phone_sms_check_model->get_row_by_phone_code ( '*', $data_input ['phone'], $data_input ['code'] );
+			if ($check == false) {
+				// 必填錯誤
+				$this->data_result ['status'] = false;
+				$this->response ( $this->data_result, 404 );
+				return;
+			} else {
+				$this->data_result ['status'] = true;
+			}
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// 標記時間計算

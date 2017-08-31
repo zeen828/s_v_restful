@@ -42,4 +42,19 @@ class Phone_sms_check_model extends CI_Model {
 		}
 		return false;
 	}
+	public function get_row_by_phone_code($select, $phone, $code) {
+		if (! empty ( $select )) {
+			$this->r_db->select ( $select );
+		}
+		$this->r_db->where ( 'phone', $phone );
+		$this->r_db->where ( 'code', $code );
+		$this->r_db->where ( 'status', '1' );
+		$this->r_db->where ( 'expires_time_at>=', time () );
+		$query = $this->r_db->get ( $this->table_name );
+		// echo $this->r_db->last_query();
+		if ($query->num_rows () > 0) {
+			return $query->row ();
+		}
+		return false;
+	}
 }

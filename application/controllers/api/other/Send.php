@@ -26,7 +26,6 @@ class Send extends REST_Controller {
 			// 變數
 			$data_input = array ();
 			// 接收變數
-			$data_input ['Authorization'] = $this->post ( 'Authorization' );
 			$data_input ['phone'] = $this->post ( 'phone' );
 			$data_input ['msm'] = $this->post ( 'msm' );
 			// 必填&格式判斷
