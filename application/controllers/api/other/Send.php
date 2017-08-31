@@ -59,6 +59,7 @@ class Send extends REST_Controller {
 			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'send_api_url' ), $url_query ) );
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			$output = curl_exec ( $ch );
+			$this->data_result ['output'] = $output;
 			curl_close ( $ch );
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
