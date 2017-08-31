@@ -48,20 +48,19 @@ class Send extends REST_Controller {
 					'dstaddr' => $data_input ['phone'],
 					'DestName' => 'vidol',
 					'encoding' => 'UTF8',
-					'smbody' => sprintf ( '你的檢查碼是[%s]', $data_input ['msm'] ) 
+					'smbody' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊', $data_input ['msm'] ) 
 			);
 			$url_query = http_build_query ( $sms_array );
-			$this->data_result ['sms_array'] = $sms_array;
-			$this->data_result ['url_query'] = $url_query;
 			// 寫資料庫
 			// 發送簡訊
 			$ch = curl_init ();
 			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'sms_send_api_url' ), $url_query ) );
-			$this->data_result ['curl_url'] = sprintf ( '%s?%s', $this->config->item ( 'sms_send_api_url' ), $url_query );
 			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
 			$output = curl_exec ( $ch );
-			$this->data_result ['output'] = $output;
 			curl_close ( $ch );
+			if(!empty($output) && $output != false){
+				$this->data_result ['status'] = true;
+			}
 			// 結束時間標記
 			$this->benchmark->mark ( 'code_end' );
 			// 標記時間計算
