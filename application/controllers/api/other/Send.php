@@ -19,6 +19,7 @@ class Send extends REST_Controller {
 			$this->benchmark->mark ( 'code_start' );
 			// 引入
 			$this->load->model ( 'vidol_user/phone_sms_check_model' );
+			$this->load->model ( 'vidol_cron/send_sms_model' );
 			$this->config->load ( 'smexpress_sms' );
 			$this->config->load ( 'restful_status_code' );
 			$this->lang->load ( 'restful_status_lang', 'traditional-chinese' );
@@ -43,31 +44,24 @@ class Send extends REST_Controller {
 			if (empty ( $data_input ['msm'] )) {
 				$data_input ['msm'] = substr ( md5 ( rand () ), 0, 6 );
 			}
-			$sms_array = array (
-					'username' => $this->config->item ( 'sms_usermname' ),
-					'password' => $this->config->item ( 'sms_password' ),
-					'dstaddr' => $data_input ['phone'],
-					'DestName' => 'vidol',
-					'encoding' => 'UTF8',
-					'smbody' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊', $data_input ['msm'] ) 
-			);
-			$url_query = http_build_query ( $sms_array );
-			// 寫資料庫
-			$data = array (
+			// 寄送簡訊資料
+			$send = $this->send_sms_model->insert_data ( array (
+					'ss_dealer' => 'smexpress',
+					'ss_phone' => $data_input ['phone'],
+					'ss_msm' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊', $data_input ['msm'] ) 
+			) );
+			// 註冊檢查資料
+			$check = $this->phone_sms_check_model->insert_data ( array (
 					'phone' => $data_input ['phone'],
 					'code' => $data_input ['msm'],
 					'expires_time_at' => strtotime ( "+10 minute" ),
 					'expires_at' => date ( "Y-m-d H:00:00", strtotime ( "+10 minute" ) ),
 					'status' => '1' 
-			);
-			$this->phone_sms_check_model->insert_data ( $data );
-			// 發送簡訊
-			$ch = curl_init ();
-			curl_setopt ( $ch, CURLOPT_URL, sprintf ( '%s?%s', $this->config->item ( 'sms_send_api_url' ), $url_query ) );
-			curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
-			$output = curl_exec ( $ch );
-			curl_close ( $ch );
-			if (! empty ( $output ) && $output != false) {
+			) );
+			// 結果
+			if (empty ( $send ) || empty ( $check )) {
+				$this->data_result ['status'] = false;
+			} else {
 				$this->data_result ['status'] = true;
 			}
 			// 結束時間標記
