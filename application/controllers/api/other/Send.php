@@ -26,7 +26,6 @@ class Send extends REST_Controller
 			$this->benchmark->mark ( 'code_start' );
 			// 變數
 			$data_input = array ();
-			$this->data_result = array ();
 			// 接收變數
 			$data_input ['Authorization'] = $this->post ( 'Authorization' );
 			$data_input ['phone'] = $this->post ( 'phone' );
