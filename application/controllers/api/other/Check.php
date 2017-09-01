@@ -2,8 +2,8 @@
 defined ( 'BASEPATH' ) or exit ( 'No direct script access allowed' );
 ini_set ( "display_errors", "On" ); // On, Off
 header ( 'Access-Control-Allow-Origin: *' );
-header ( 'Access-Control-Allow-Headers: X-Requested-With' );
 header ( 'Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS' );
+header( 'Access-Control-Allow-Headers: X-Requested-With, Content-Type, Accept' );
 require_once APPPATH . '/libraries/REST_Controller.php';
 class Check extends REST_Controller {
 	private $data_result;
