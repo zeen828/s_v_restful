@@ -44,20 +44,22 @@ class Send extends REST_Controller {
 			}
 			// 整理資料
 			if (empty ( $data_input ['msm'] )) {
-				$data_input ['msm'] = substr ( md5 ( rand () ), 0, 6 );
+				// $data_input ['msm'] = substr ( md5 ( rand () ), 0, 6 );
+				$data_input ['msm'] = rand ( 100000, 999999 );
 			}
 			// 寄送簡訊資料
 			$send = $this->send_sms_model->insert_data ( array (
 					'ss_dealer' => 'smexpress',
 					'ss_phone' => $data_input ['phone'],
-					'ss_msm' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊,註冊成功半小時內會開通認證', $data_input ['msm'] ) 
+					//'ss_msm' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊,註冊成功半小時內會開通認證', $data_input ['msm'] )
+					'ss_msm' => sprintf ( '您的【Vidol影音】簡訊驗證碼為%s。此驗證碼15分鐘內有效。提醒您，請勿將此驗證碼提供給其他人以保障您的使用安全。若您未提出申請，請直接忽略此封簡訊，謝謝。', $data_input ['msm'] )
 			) );
 			// 註冊檢查資料
 			$check = $this->phone_sms_check_model->insert_data ( array (
 					'phone' => $data_input ['phone'],
 					'code' => $data_input ['msm'],
-					'expires_time_at' => strtotime ( "+10 minute" ),
-					'expires_at' => date ( "Y-m-d H:00:00", strtotime ( "+10 minute" ) ),
+					'expires_time_at' => strtotime ( "+15 minute" ),
+					'expires_at' => date ( "Y-m-d H:00:00", strtotime ( "+15 minute" ) ),
 					'status' => '1' 
 			) );
 			// 結果
