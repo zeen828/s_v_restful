@@ -52,7 +52,7 @@ class Send extends REST_Controller {
 					'ss_dealer' => 'smexpress',
 					'ss_phone' => $data_input ['phone'],
 					//'ss_msm' => sprintf ( '你的檢查碼是[%s]請在10分鐘內註冊,註冊成功半小時內會開通認證', $data_input ['msm'] )
-					'ss_msm' => sprintf ( '您的【Vidol影音】簡訊驗證碼為%s。此驗證碼15分鐘內有效。提醒您，請勿將此驗證碼提供給其他人以保障您的使用安全。若您未提出申請，請直接忽略此封簡訊，謝謝。', $data_input ['msm'] )
+					'ss_msm' => sprintf ( '您的【Vidol影音】驗證碼為%s。此驗證碼15分鐘內有效。請勿將驗證碼提供他人以保障您的使用安全。若您未申請，請忽略此封簡訊，謝謝。', $data_input ['msm'] )
 			) );
 			// 註冊檢查資料
 			$check = $this->phone_sms_check_model->insert_data ( array (
